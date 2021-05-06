@@ -24,7 +24,7 @@ Talk with your group. Consider drawing some pictures of what you think your proj
 
 [Ultimate Tic Tac Toe]
 Authors: Irena Liu, Katy Tsao
-Revision: 4-19-2021
+Revision: 5-6-2021
 
 
 Introduction: 
