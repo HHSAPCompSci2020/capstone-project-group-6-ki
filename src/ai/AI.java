@@ -7,7 +7,7 @@
 
 package ai;
 
-import components.DrawingPanel;
+import views.Game;
 import objects.Spot;
 
 /**
@@ -16,22 +16,22 @@ import objects.Spot;
  */
 public abstract class AI {
 	
-	private DrawingPanel board;
+	private Game game;
 
 	/**
 	 * Creates a new AI
 	 * @param board The DrawingPanel that this AI will play in
 	 */
-	public AI(DrawingPanel board) {
-		this.board = board;
+	public AI(Game game) {
+		this.game = game;
 	}
 	
 	/**
 	 * Getter for the DrawingPanel that this AI is in.
 	 * @return The DrawingPanel
 	 */
-	public DrawingPanel getBoard() {
-		return board;
+	public Game getGame() {
+		return game;
 	}
 	
 	/**

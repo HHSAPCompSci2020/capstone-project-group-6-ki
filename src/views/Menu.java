@@ -11,47 +11,33 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 import ultimate_tictactoe.Main;
-import ultimate_tictactoe.Main.STATE;
 
 /**
  * View with the options to go to Game, Instructions, Settings
  * @author katytsao
  */
-public class Menu extends JPanel implements ActionListener{
+public class Menu extends View implements ActionListener {
 	
-	private Main w;
-	
+	private JButton settings, info, game;
 	private static final long serialVersionUID = 1L;
-
-	JButton b1 = new JButton("Settings");
-		JButton b2 = new JButton("How to Play");
-		JButton b3 = new JButton("Play");
+	
+	public Menu(Main router) {
+		super(router);
+		settings = new JButton("Settings");
+		settings.addActionListener(this);
+		add(settings);
 		
-		Instructions i = new Instructions();
-		Settings s = new Settings();
-	public Menu() {
-
-		JPanel p = new JPanel();
-//		p.setBackground(Color.white);
-//		p.setLayout(new BoxLayout(p,BoxLayout.Y_AXIS));
-//		p.add(Box.createVerticalStrut(300));
-//		setOpaque(false);	
-
-		b1.addActionListener(this);
-		p.add(b1);
-		add(p);
+		info = new JButton("How to Play");
+		info.addActionListener(this);
+		add(info);
 		
-		b2.addActionListener(this);
-		p.add(b2);
-		add(p);
-		
-		b3.setPreferredSize(new Dimension(50,40));
-		b3.setLocation(WIDTH/2, HEIGHT/2);
-		b3.addActionListener(this);		
-		p.add(b3);
-		add(p);
-p.paintComponents(getGraphics());
-		}
+		game = new JButton("Play");
+		game.setPreferredSize(new Dimension(50,40));
+		game.setLocation(WIDTH/2, HEIGHT/2);
+		game.addActionListener(this);		
+		add(game);
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -61,22 +47,18 @@ p.paintComponents(getGraphics());
 		g.drawString("ULTIMATE TIC-TAC-TOE", 50 , 200);
 		
 	}
-	@Override
+	
 	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton)e.getSource();
-		if (button == b1) {
-			
-			s.setVisible(true);
+		JButton b = (JButton)e.getSource();
+		if(b==settings) {
+			push("settings");
 		}
-		else if (button == b2) {
-			
-			i.setVisible(true);
+		else if(b==info) {
+			push("info");
 		}
-		else if (button == b3) {
-			w.State = w.State.GAME;
+		else if(b==game) {
+			push("game");
 		}
-			
-		
 	}
 
 }

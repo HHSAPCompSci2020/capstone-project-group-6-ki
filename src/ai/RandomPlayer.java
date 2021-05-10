@@ -7,7 +7,7 @@
 
 package ai;
 
-import components.DrawingPanel;
+import views.Game;
 import objects.Spot;
 
 /**
@@ -20,8 +20,8 @@ public class RandomPlayer extends AI {
 	 * Creates a Level-1 AI
 	 * @param board The DrawingPanel that the RandomPlayer plays in
 	 */
-	public RandomPlayer(DrawingPanel board) {
-		super(board);
+	public RandomPlayer(Game game) {
+		super(game);
 	}
 	
 	/**
