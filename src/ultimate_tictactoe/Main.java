@@ -42,7 +42,6 @@ public class Main extends JFrame {
 		
 		router = menu;
 		c.add(router);
-//		c.add(new components.DrawingPanel());
 
 		setSize(600, 600);
 		setLocationRelativeTo(null);
@@ -52,6 +51,11 @@ public class Main extends JFrame {
 		setFocusable(true);
 	}
 	
+	/**
+	 * Pushes the gameview into the correct component. 
+	 * 
+	 * @param view The name of the component to be shown
+	 */
 	public void push(String view) {
 		c.remove(router);
 		switch(view) {
