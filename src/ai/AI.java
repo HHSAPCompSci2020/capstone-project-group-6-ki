@@ -8,7 +8,7 @@
 package ai;
 
 import views.Game;
-import objects.Spot;
+import java.awt.Point;
 
 /**
  * Abstract superclass for all future AI classes.
@@ -38,6 +38,6 @@ public abstract class AI {
 	 * Abstract method to be an AI's move decision.
 	 * @return The Spot that the AI chooses to play in
 	 */
-	public abstract Spot makeMove();
+	public abstract Point makeMove();
 
 }

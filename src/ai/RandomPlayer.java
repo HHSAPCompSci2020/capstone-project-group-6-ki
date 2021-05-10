@@ -8,7 +8,7 @@
 package ai;
 
 import views.Game;
-import objects.Spot;
+import java.awt.Point;
 
 /**
  * A Level-1 AI that has zero strategy and literally randomly selects an available location to play in.
@@ -28,8 +28,18 @@ public class RandomPlayer extends AI {
 	 * Chooses a Spot to play in
 	 * @return The Spot that the RandomPlayer chose to play in
 	 */
-	public Spot makeMove() {
-		return null;
+	public Point makeMove() {
+		int a, b;
+		a = getGame().getNextGrid();
+		do {
+			b = (int)(9*Math.random() + 1);
+			
+			if(getGame().getBigSpot(a).isOccupied()) {
+				a = (int)(9*Math.random() + 1);
+			}
+			
+		} while(getGame().getSpot(a, b).isOccupied() || getGame().getBigSpot(a).isOccupied());
+		return new Point(a, b);
 	}
 
 }

@@ -9,6 +9,7 @@ package views;
 
 import ultimate_tictactoe.Main;
 import objects.*;
+import ai.RandomPlayer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -33,8 +34,9 @@ public class Game extends View implements MouseListener, ActionListener {
 	private Spot[][] smols;
 	private int nextGrid, clickedGrid, clickedSmol;
 	private Spot clickedSpot, lastSpot;
-	private JButton back, undo, reset;
-	// private boolean gameOver;
+	private JButton back, undo, reset, turnOnAi, turnOffAi;
+	private boolean gameOver, aiOn;
+	private RandomPlayer rp;
 	
 	private double margin = 0.1; // how much of the space will each small grid take? this means 0.1 margin on each side
 	private double m2 = 1-margin; // the other end of the big margin
@@ -58,7 +60,7 @@ public class Game extends View implements MouseListener, ActionListener {
 		allMarks = new Mark[0];
 		numBigMarks = 0;
 		allBigMarks = new Mark[0];
-		// gameOver = false;
+		gameOver = false;
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -72,6 +74,20 @@ public class Game extends View implements MouseListener, ActionListener {
 		reset.setPreferredSize(new Dimension(120, 30));
 	    reset.addActionListener(this);
 	    add(reset);
+	    
+	    turnOnAi = new JButton("Turn AI On");
+		turnOnAi.setPreferredSize(new Dimension(120, 30));
+	    turnOnAi.addActionListener(this);
+	    add(turnOnAi);
+	    
+	    turnOffAi = new JButton("Turn AI Off");
+		turnOffAi.setPreferredSize(new Dimension(120, 30));
+	    turnOffAi.addActionListener(this);
+	    add(turnOffAi);
+	    turnOffAi.setVisible(false);
+	    
+	    rp = new RandomPlayer(this);
+	    aiOn = false;
 	}
 	
 	/**
@@ -87,6 +103,11 @@ public class Game extends View implements MouseListener, ActionListener {
 			drawGrid(g, bigs[i]);
 		}
 		drawMarks(g);
+		
+		if(!gameOver && aiOn && numMarks%2!=0) {
+			java.awt.Point p = rp.makeMove();
+			aiMoved(p.x, p.y);
+		}
 	}
 	
 	private void drawGrid(Graphics g, Rectangle r) {
@@ -269,7 +290,7 @@ public class Game extends View implements MouseListener, ActionListener {
 				JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
 			}
 			bigs[clickedGrid].occupy(x);
-			// gameOver = true;
+			gameOver = true;
 		}
 	}
 	
@@ -310,6 +331,29 @@ public class Game extends View implements MouseListener, ActionListener {
 		repaint();
 	}
 	
+	private void aiMoved(int a, int b) {
+		clickedSpot = getSpot(a, b);
+		clickedGrid = a;
+		clickedSmol = b;
+		clickedSpot.occupy(2);
+		addMark(new O(clickedSpot, clickedGrid, clickedSmol, Color.BLUE));
+		repaint();
+	}
+	
+	private void turnOnAi() {
+		aiOn = true;
+		turnOnAi.setVisible(false);
+		turnOffAi.setVisible(true);
+		repaint();
+	}
+	
+	private void turnOffAi() {
+		aiOn = false;
+		turnOffAi.setVisible(false);
+		turnOnAi.setVisible(true);
+		repaint();
+	}
+	
 	private void refresh(MouseEvent e) {
 		x = e.getX();
 		y = e.getY();
@@ -323,15 +367,11 @@ public class Game extends View implements MouseListener, ActionListener {
 	// req by ActionListener interface
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton)e.getSource();
-		if(b==back) {
-			push("menu");
-		}
-		else if(b==undo) {
-			undo();
-		}
-		else if(b==reset) {
-			reset();
-		}		
+		if(b==back) push("menu");
+		else if(b==undo) undo();
+		else if(b==reset) reset();
+		else if(b==turnOnAi) turnOnAi();
+		else if(b==turnOffAi) turnOffAi();
 		repaint();
 	}
 	
