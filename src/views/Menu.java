@@ -48,7 +48,7 @@ public class Menu extends View implements ActionListener {
 		game = new JButton("Play");
 		game.setPreferredSize(new Dimension(100,60));
 //		game.
-//		game.addActionListener(this);		
+		game.addActionListener(this);		
 		p.add(game);
 		
 		add(p);
