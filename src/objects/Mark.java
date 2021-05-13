@@ -45,9 +45,10 @@ public abstract class Mark {
 	 */
 	public abstract void draw(Graphics g);	
 	
+	// STATIC METHODS
 	public static Mark postToMark(Post p) {
-		if(p.letter == "x") return new X(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
-		else if(p.letter == "o") return new O(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		if(p.letter.equals("x")) return new X(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		else if(p.letter.equals("o")) return new O(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
 		else return null;
 	}
 	

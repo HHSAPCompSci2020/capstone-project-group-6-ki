@@ -45,7 +45,6 @@ public class Board {
 	
 	// public methods called by Game
 	public void draw(Graphics g) {
-		System.out.println(numMarks);
 		if(numMarks>0) {
 			colorNextGrid(g);
 			colorLastSpot(g);
@@ -77,8 +76,9 @@ public class Board {
 		numMarks++;
 		smallMarks.add(m);
 		lastSpot = getSmallSpot(m.big(), m.small());
-		checkFor3();
+		clickedGrid = m.big();
 		nextGrid = m.small();
+		checkFor3();
 	}
 	public void reset() {
 		numMarks = 0;
@@ -185,7 +185,7 @@ public class Board {
 	}
 	private void drawMarks(Graphics g) {
 		for(Mark m : smallMarks) m.draw(g);
-		for(Mark m : bigMarks) m.draw(g);
+		for(Mark b : bigMarks) b.draw(g);
 	}
 	private void colorNextGrid(Graphics g) {
 		if(!bigSpots[nextGrid].isOccupied()) {

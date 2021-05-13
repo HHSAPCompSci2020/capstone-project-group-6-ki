@@ -18,6 +18,8 @@ import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -25,11 +27,12 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
 
+
 /**
  * View that holds the main game
  * @author katytsao
  */
-public class Game extends View implements MouseListener, ActionListener, ChildEventListener {
+public class Game extends View implements MouseListener, ActionListener {
 	
 	private DatabaseReference ref;
 	private Board board;
@@ -82,7 +85,7 @@ public class Game extends View implements MouseListener, ActionListener, ChildEv
 	    	DatabaseReference database = FirebaseDatabase.getInstance().getReference();
 	    	ref = database.child("game");
 
-	    	ref.addChildEventListener(this);
+	    	ref.addChildEventListener(new DatabaseChangeListener());
 
 	    } catch (IOException e) {
 	    	e.printStackTrace();
@@ -110,20 +113,14 @@ public class Game extends View implements MouseListener, ActionListener, ChildEv
 		board.createMark(e.getX(), e.getY());
 		repaint();
 	}
-	public void onChildAdded(DataSnapshot dataSnapshot, String arg1) {
-		Post p = dataSnapshot.getValue(Post.class);
-		if(p.letter == "r") board.reset();
-		else if (p.letter == "u") board.undo();
-		else if(p.letter == "x" || p.letter == "o") board.addMark(Mark.postToMark(p));
-		repaint();
-	}
 	
 	// in-game methods
 	public void pushMark(Mark m) {
 		ref.push().setValueAsync(Mark.markToPost(m));
 	}
 	private void pushReset() {
-		ref.push().setValueAsync(Mark.removePost("r"));; // Removes all data from the database
+		ref.push().setValueAsync(Mark.removePost("r"));
+		ref.setValueAsync(null); // removes all data from the database
 	}
 	private void pushUndo() {
 		ref.push().setValueAsync(Mark.removePost("u"));
@@ -146,12 +143,41 @@ public class Game extends View implements MouseListener, ActionListener, ChildEv
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
+	
+	
+	/**
+	 * 
+	 * Handles all changes to the database reference. Because Firebase uses a separate thread than most other processes we're using (both Swing and Processing),
+	 * we need to have a strategy for ensuring that code is executed somewhere besides these methods.
+	 * 
+	 * @author john_shelby
+	 *
+	 */
+	class DatabaseChangeListener implements ChildEventListener {
+		
+		public void onChildAdded(DataSnapshot dataSnapshot, String arg1) {
+			SwingUtilities.invokeLater(new Runnable() {  // This threading strategy will work with Swing programs. Just put whatever code you want inside of one of these "runnable" wrappers.
 
-	// methods req by ChildEventListener
-	public void onCancelled(DatabaseError arg0) {}
-	public void onChildChanged(DataSnapshot arg0, String arg1) {}
-	public void onChildMoved(DataSnapshot arg0, String arg1) {}
-	public void onChildRemoved(DataSnapshot arg0) {}
+				@Override
+				public void run() {
+					Post p = dataSnapshot.getValue(Post.class);
+					if(p.letter.equals("r")) board.reset();
+					else if (p.letter.equals("u")) board.undo();
+					else if(p.letter.equals("x") || p.letter.equals("o")) {
+						board.addMark(Mark.postToMark(p));
+					}
+					repaint();
+				}
+				
+			});
+		}
+
+		// methods req by ChildEventListener
+		public void onCancelled(DatabaseError arg0) {}
+		public void onChildChanged(DataSnapshot arg0, String arg1) {}
+		public void onChildMoved(DataSnapshot arg0, String arg1) {}
+		public void onChildRemoved(DataSnapshot arg0) {}
+	}
 	
 	
 }
