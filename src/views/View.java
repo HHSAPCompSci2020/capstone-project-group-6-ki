@@ -1,4 +1,4 @@
-/*
+/**
  * Abstract superclass for all view pages
  * 
  * Created 5-9-2021

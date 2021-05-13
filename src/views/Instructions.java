@@ -27,11 +27,14 @@ public class Instructions extends View implements ActionListener {
 		back.setBounds(10, 10, 20, 10);
 		add(back);
 		
-		JLabel L1 = new JLabel(" When the game is displayed, there is a large tic-tac-toe grid and in each box there is a smaller game. \n");
+		JLabel L1 = new JLabel(" Game display: large tic-tac-toe grid and in each 9 boxes there is a smaller game.");
+		JLabel L7 = new JLabel(" You have the option to undo, reset, and switch the AI mode");
+		
 		JLabel L2 = new JLabel(" Objective: to win the large game by getting three in a row");
-		JLabel L3 = new JLabel(" In order to claim a box of the large game you have to win the smaller game in that location.");
-		JLabel L4 = new JLabel(" NOTE: After your opponent selects a box of a small game, you have to make your next move in that same small game.");
-		JLabel L5 = new JLabel(" If you are playing in multiplayer, the person who goes first ");
+		JLabel L3 = new JLabel(" In order to claim a box of the large game you have to win the smaller game.");
+		JLabel L4 = new JLabel(" NOTE: After your opponent selects a box of a small game, ");
+		JLabel L5 = new JLabel(" you have to make your next move in the same small box. ");
+		JLabel L6 = new JLabel(" The box you should make your move in will change to a light green color ");
 
 		L1.setAlignmentX(CENTER_ALIGNMENT);
 		L2.setAlignmentX(CENTER_ALIGNMENT);
@@ -41,6 +44,9 @@ public class Instructions extends View implements ActionListener {
 
 		L1.setBounds(50,20, 150,20); 
 		add(L1);
+		
+		L7.setBounds(50, 30, 150, 20);
+		add(L7);
 
 		L2.setBounds(50,40, 150,20); 
 		add(L2);
@@ -52,6 +58,9 @@ public class Instructions extends View implements ActionListener {
 		add(L4);
 
 		L5.setBounds(50,100, 150,20); 
+		add(L5);
+		
+		L6.setBounds(50,100, 150,20); 
 		add(L5);
 	}
 

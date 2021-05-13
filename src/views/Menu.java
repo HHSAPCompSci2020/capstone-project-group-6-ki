@@ -23,19 +23,35 @@ public class Menu extends View implements ActionListener {
 	
 	public Menu(Main router) {
 		super(router);
-		settings = new JButton("Settings");
-		settings.addActionListener(this);
-		add(settings);
+		JPanel p = new JPanel(new GridBagLayout());
+		p.setBackground(Color.white);
 		
+		GridBagConstraints c = new GridBagConstraints();
+		
+//		c.insets = new Insets(10,10,25,25);
+//		c.gridx = 50;
+//		c.gridy = 100;
+		
+		settings = new JButton("Settings");
+		settings.setBounds(400, 500, 100, 100);
+		settings.addActionListener(this);
+		p.add(settings);
+		
+//		c.gridx = 50;
+//		c.gridy = 120;
 		info = new JButton("How to Play");
 		info.addActionListener(this);
-		add(info);
+		p.add(info);
 		
+//		c.gridx = 50;
+//		c.gridy = 140;
 		game = new JButton("Play");
-		game.setPreferredSize(new Dimension(50,40));
-		game.setLocation(WIDTH/2, HEIGHT/2);
-		game.addActionListener(this);		
-		add(game);
+		game.setPreferredSize(new Dimension(100,60));
+//		game.
+//		game.addActionListener(this);		
+		p.add(game);
+		
+		add(p);
 	}
 	
 	public void paintComponent(Graphics g) {

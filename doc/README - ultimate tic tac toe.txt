@@ -38,12 +38,11 @@ Primary features include color-coding for last plays and highlighted games, undo
 Instructions:
 When the user first runs the program, they are met with the main menu in which they will navigate through to set up the game. The icons that are displayed in the main menu are “settings,” “how to play,” and “play.” 
 
-
 If the user selects “settings,” they are able to customize their player by changing their icon and X/O color. This is also where they chose between the AI or multiplayer mode.  If AI is selected there may be multiple levels that the player can choose to play against. 
 
+After they customize their game, they will have to go back to the main menu and select “play” to go to the main game.
 
-If the user selects “how to play,” they will be shown the instructions. After they customize their game, they will have to go back to the main menu and select “play” to go to the main game.
-
+If the user selects “how to play,” they will be shown the instructions. 
 
 During the match, they click on the space on the board where they would like to place their next move.
 
