@@ -20,7 +20,10 @@ public class Menu extends View implements ActionListener {
 	
 	private JButton settings, info, game;
 	private static final long serialVersionUID = 1L;
-	
+	/** 
+	 * Displays the main menu of the game 
+	 * @param router
+	 */
 	public Menu(Main router) {
 		super(router);
 		JPanel p = new JPanel(new GridBagLayout());
@@ -53,6 +56,9 @@ public class Menu extends View implements ActionListener {
 		
 		add(p);
 	}
+	/**
+	 * paintComponent method from JPanel superclass; called at each repaint
+	 */
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

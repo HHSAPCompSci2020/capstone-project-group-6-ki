@@ -18,7 +18,10 @@ public class Instructions extends View implements ActionListener {
 
 	private JButton back;
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * Displays the text on the instructions page
+	 * @param router 
+	 */
 	public Instructions(Main router) {
 		super(router);
 		

@@ -23,7 +23,9 @@ public class Settings extends View implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
 	private JButton back;
-	
+	/**
+	 * Displays the functions of the Settings page
+	 */
 	public Settings(Main router) {
 		super(router);
 		
