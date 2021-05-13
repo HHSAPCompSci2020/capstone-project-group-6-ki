@@ -24,7 +24,8 @@ public abstract class Mark {
 	/**
 	 * Create a new Mark object
 	 * @param box The rectangle that the mark will be inside
-	 * @param color The color of the mark
+	 * @param big Corresponding big box
+	 * @param small Corresponding small box
 	 */
 	public Mark(Rectangle box, int big, int small) {
 		r = box;

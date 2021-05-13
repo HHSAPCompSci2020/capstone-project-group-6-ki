@@ -28,6 +28,7 @@ public class Settings extends View implements ActionListener{
 	 */
 	public Settings(Main router) {
 		super(router);
+		setBackground(Color.getHSBColor(290f / 360, 0.15f, 0.98f));
 		
 		back = new JButton("Main Menu"); // return to main menu
 		back.addActionListener(this);
@@ -43,6 +44,7 @@ public class Settings extends View implements ActionListener{
 		g.setColor(Color.BLACK);
 		g.drawString("Change icon color of \"X\"", 50 , 200);
 		g.drawString("Change icon color of \"O\"", 350 , 200);
+		g.drawString("AI Level", 150 , 400);
 		
 	}
 

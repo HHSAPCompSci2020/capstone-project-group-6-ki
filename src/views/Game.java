@@ -100,6 +100,9 @@ public class Game extends View implements MouseListener, ActionListener {
 		super.paintComponent(g);
 		board.draw(g);
 	}
+	/**
+	 * Changes the game based on the button pressed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton)e.getSource();
 		if(b==back) push("menu");
