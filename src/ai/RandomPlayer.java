@@ -7,7 +7,7 @@
 
 package ai;
 
-import views.Game;
+import objects.Board;
 import java.awt.Point;
 
 /**
@@ -20,8 +20,8 @@ public class RandomPlayer extends AI {
 	 * Creates a Level-1 AI
 	 * @param board The DrawingPanel that the RandomPlayer plays in
 	 */
-	public RandomPlayer(Game game) {
-		super(game);
+	public RandomPlayer(Board board) {
+		super(board);
 	}
 	
 	/**
@@ -38,7 +38,7 @@ public class RandomPlayer extends AI {
 				a = (int)(9*Math.random() + 1);
 			}
 			
-		} while(getGame().getSpot(a, b).isOccupied() || getGame().getBigSpot(a).isOccupied());
+		} while(getGame().getSmallSpot(a, b).isOccupied() || getGame().getBigSpot(a).isOccupied());
 		return new Point(a, b);
 	}
 

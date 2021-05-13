@@ -7,7 +7,6 @@
 
 package objects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -18,8 +17,7 @@ import java.awt.Rectangle;
 public abstract class Mark {
 	
 	// FIELDS
-	protected Color c;
-	protected Rectangle r;
+	private Rectangle r;
 	private int big, small;
 
 	// CONSTRUCTOR
@@ -28,14 +26,14 @@ public abstract class Mark {
 	 * @param box The rectangle that the mark will be inside
 	 * @param color The color of the mark
 	 */
-	public Mark(Rectangle box, int big, int small, Color color) {
+	public Mark(Rectangle box, int big, int small) {
 		r = box;
-		c = color;
 		this.big = big;
 		this.small = small;
 	}
 	
 	// GETTERS
+	public Rectangle rect() { return r; }
 	public int big() { return big; }
 	public int small() { return small; }
 	
@@ -46,5 +44,35 @@ public abstract class Mark {
 	 * @param g The Graphics object to draw with
 	 */
 	public abstract void draw(Graphics g);	
+	
+	public static Mark postToMark(Post p) {
+		if(p.letter == "x") return new X(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		else if(p.letter == "o") return new O(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		else return null;
+	}
+	
+	public static Post markToPost(Mark m) {
+		Post p = new Post();
+		Rectangle r = m.rect();
+		p.x = r.x;
+		p.y = r.y;
+		p.w = r.width;
+		p.h = r.height;
+		p.big = m.big();
+		p.small = m.small();
+		if (m instanceof X) {
+			p.letter = "x";
+		}
+		else if (m instanceof O) {
+			p.letter = "o";
+		}
+		return p;
+	}
+	
+	public static Post removePost(String s) {
+		Post p = new Post();
+		p.letter = s;
+		return p;
+	}
 
 }

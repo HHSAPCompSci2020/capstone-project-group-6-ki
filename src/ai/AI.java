@@ -7,7 +7,7 @@
 
 package ai;
 
-import views.Game;
+import objects.Board;
 import java.awt.Point;
 
 /**
@@ -16,13 +16,13 @@ import java.awt.Point;
  */
 public abstract class AI {
 	
-	private Game game;
+	private Board game;
 
 	/**
 	 * Creates a new AI
 	 * @param board The DrawingPanel that this AI will play in
 	 */
-	public AI(Game game) {
+	public AI(Board game) {
 		this.game = game;
 	}
 	
@@ -30,7 +30,7 @@ public abstract class AI {
 	 * Getter for the DrawingPanel that this AI is in.
 	 * @return The DrawingPanel
 	 */
-	public Game getGame() {
+	public Board getGame() {
 		return game;
 	}
 	
