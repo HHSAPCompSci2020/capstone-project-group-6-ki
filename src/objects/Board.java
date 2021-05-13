@@ -13,7 +13,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 
-
+/**
+ * Holds all the gameboard data
+ * @author katytsao
+ *
+ */
 public class Board {
 
 	private Game game;
@@ -31,6 +35,10 @@ public class Board {
 	private double m2 = 1-margin; // the other end of the big margin
 	private double f = 1 - 2*margin;
 
+	/**
+	 * Creates a new Board
+	 * @param game The Game view that this Board is inside
+	 */
 	public Board(Game game) {
 		this.game = game;
 		bigSpots = new Spot[10];
@@ -44,6 +52,11 @@ public class Board {
 	}
 	
 	// public methods called by Game
+	
+	/**
+	 * Draws the game
+	 * @param g The Graphics object to do the drawing
+	 */
 	public void draw(Graphics g) {
 		if(numMarks>0) {
 			colorNextGrid(g);
@@ -59,6 +72,12 @@ public class Board {
 			aiMoved(p.x, p.y);
 		}
 	}
+	
+	/**
+	 * Tries to create a new Mark at a clicked point
+	 * @param x The x-coordinate of the clicked point
+	 * @param y The y-coordinate of the clicked point
+	 */
 	public void createMark(int x, int y) {
 		clickedSpot = findSpot(x, y);
 		if(allowedToMark()) {
@@ -72,6 +91,11 @@ public class Board {
 			}
 		}
 	}
+	
+	/**
+	 * Adds a Mark to the game
+	 * @param m The Mark to be added
+	 */
 	public void addMark(Mark m) {
 		numMarks++;
 		smallMarks.add(m);
@@ -80,11 +104,19 @@ public class Board {
 		nextGrid = m.small();
 		checkFor3();
 	}
+	
+	/**
+	 * Clears the entire board
+	 */
 	public void reset() {
 		numMarks = 0;
 		smallMarks.clear();
 		bigMarks.clear();
 	}
+	
+	/**
+	 * Undoes the most recent move
+	 */
 	public void undo() {
 		if(numMarks<=1) reset();
 		else {

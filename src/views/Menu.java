@@ -26,7 +26,7 @@ public class Menu extends View implements ActionListener {
 		JPanel p = new JPanel(new GridBagLayout());
 		p.setBackground(Color.white);
 		
-		GridBagConstraints c = new GridBagConstraints();
+//		GridBagConstraints c = new GridBagConstraints();
 		
 //		c.insets = new Insets(10,10,25,25);
 //		c.gridx = 50;
@@ -48,7 +48,7 @@ public class Menu extends View implements ActionListener {
 		game = new JButton("Play");
 		game.setPreferredSize(new Dimension(100,60));
 //		game.
-//		game.addActionListener(this);		
+		game.addActionListener(this);		
 		p.add(game);
 		
 		add(p);

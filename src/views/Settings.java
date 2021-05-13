@@ -13,8 +13,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
-import javax.swing.*;
-import ultimate_tictactoe.Main;
+
 
 /**
  * View that allows users to change colors and icons and AI's.

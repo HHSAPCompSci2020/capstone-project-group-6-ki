@@ -115,6 +115,10 @@ public class Game extends View implements MouseListener, ActionListener {
 	}
 	
 	// in-game methods
+	/**
+	 * Pushes a new Mark to the Firebase database.
+	 * @param m The Mark to be pushed
+	 */
 	public void pushMark(Mark m) {
 		ref.push().setValueAsync(Mark.markToPost(m));
 	}
@@ -155,6 +159,9 @@ public class Game extends View implements MouseListener, ActionListener {
 	 */
 	class DatabaseChangeListener implements ChildEventListener {
 		
+		/**
+		 * Runs each time something is added to the Firebase database
+		 */
 		public void onChildAdded(DataSnapshot dataSnapshot, String arg1) {
 			SwingUtilities.invokeLater(new Runnable() {  // This threading strategy will work with Swing programs. Just put whatever code you want inside of one of these "runnable" wrappers.
 
