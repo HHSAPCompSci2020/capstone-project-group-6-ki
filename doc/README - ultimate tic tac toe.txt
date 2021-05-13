@@ -85,15 +85,18 @@ Class List:
 * Main(JFrame): runs a JFrame with the game in it
 * Menu(JPanel)
 * Game(JPanel)
-   * ControlPanel(JPanel, ActionListener)
-   * DrawingPanel(JPanel, MouseListener)
+* Board
+* Post
 * Spot(Rectangle)
 * Mark
    * X(Mark)
    * O(Mark)
 * AI
+   * RandomPlayer
 * Instructions(JPanel)
 * Settings(JPanel)
+* View
+
 
 
 Credits:
