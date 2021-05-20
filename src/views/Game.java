@@ -119,13 +119,7 @@ public class Game extends View implements MouseListener, ActionListener {
 		if(b==back) push("menu");
 		else if(b==undo) pushUndo();
 		else if(b==reset) pushReset();
-<<<<<<< Updated upstream
 		updateTimer();
-=======
-		else if(b==turnOnAi) turnOnAi();
-		else if(b==turnOffAi) turnOffAi();
-		
->>>>>>> Stashed changes
 		repaint();
 	}
 	private void updateTimer() {
