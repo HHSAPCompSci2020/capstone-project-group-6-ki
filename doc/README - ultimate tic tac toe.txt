@@ -110,13 +110,21 @@ Outside resources:
 
 Irena Liu:
 Done:
-* Created and updated UML
-To-do:
-* Figure out navigation between pages
+* Created and updated UML 
+* Set up all the views pages
+* Implement navigation between pages
+* Timer
+
+To Do:
+* Make the AI smarter
 
 
 Katy Tsao:
 Done:
 * Setup Eclipse project and classes
-To-do:
-* Set up the main game
+* Objects package
+* Basic AI
+* Fixed bug with navigation between pages
+
+
+

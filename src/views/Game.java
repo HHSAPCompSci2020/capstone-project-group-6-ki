@@ -18,7 +18,10 @@ import java.awt.event.MouseListener;
 import java.io.FileInputStream;
 import java.io.IOException;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +29,7 @@ import java.awt.event.ActionEvent;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
+import java.util.*;
 
 
 /**
@@ -33,19 +37,29 @@ import com.google.firebase.database.*;
  * @author katytsao
  */
 public class Game extends View implements MouseListener, ActionListener {
-	
+	private long lastUpdate;
+	private long remaining;
+	private Timer timer;
 	private DatabaseReference ref;
 	private Board board;
+	private JLabel label;
 	private JButton back, undo, reset, turnOnAi, turnOffAi;
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Creates a new Game component and draws all the grids
 	 */
-	public Game(Main router) {
+	public Game(Main router) {	
 		super(router);
 		addMouseListener(this);
 		setSize(600, 600);
+		timer = new Timer(100, this);
+		timer.setInitialDelay(10);
+		timer.setRepeats(true);
+		
+		remaining = 30000; //30 seconds
+		label = new JLabel();
+		add(label);
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -110,7 +124,24 @@ public class Game extends View implements MouseListener, ActionListener {
 		else if(b==reset) pushReset();
 		else if(b==turnOnAi) turnOnAi();
 		else if(b==turnOffAi) turnOffAi();
+		updateTimer();
 		repaint();
+	}
+	private void updateTimer() {
+		long now = System.currentTimeMillis();
+		long elapsed = now - lastUpdate;
+		remaining -= elapsed;
+		lastUpdate = now;
+		
+		if (remaining < 0) 
+			remaining = 0;
+		int seconds = (int) ((remaining)/1000);
+		label.setText((String.valueOf(seconds)));
+		
+		if (remaining == 0) {
+			timer.stop();
+			
+		}
 	}
 	public void mouseClicked(MouseEvent e) {
 		board.createMark(e.getX(), e.getY());
