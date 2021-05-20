@@ -46,7 +46,7 @@ public class Main extends JFrame {
 		router = menu;
 		c.add(router);
 
-		setSize(600, 600);
+		setSize(600, 650);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setResizable(false);

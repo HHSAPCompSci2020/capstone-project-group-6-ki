@@ -52,13 +52,19 @@ public class Game extends View implements MouseListener, ActionListener {
 		super(router);
 		addMouseListener(this);
 		setSize(600, 600);
-		timer = new Timer(100, this);
-		timer.setInitialDelay(10);
-		timer.setRepeats(true);
 		
-		remaining = 30000; //30 seconds
+		
+		 //30 seconds
 		label = new JLabel();
+		label.setText("30 s");
+		label.setSize(100, 20);
+		remaining = 30000;
+		label.setLocation(500, 600);
 		add(label);
+		
+		timer = new Timer(100, this);
+		timer.setInitialDelay(1);
+		timer.start();
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -108,11 +114,18 @@ public class Game extends View implements MouseListener, ActionListener {
 	 * Changes the game based on the button pressed
 	 */
 	public void actionPerformed(ActionEvent e) {
+		updateTimer();
 		JButton b = (JButton)e.getSource();
 		if(b==back) push("menu");
 		else if(b==undo) pushUndo();
 		else if(b==reset) pushReset();
+<<<<<<< Updated upstream
 		updateTimer();
+=======
+		else if(b==turnOnAi) turnOnAi();
+		else if(b==turnOffAi) turnOffAi();
+		
+>>>>>>> Stashed changes
 		repaint();
 	}
 	private void updateTimer() {
@@ -124,7 +137,7 @@ public class Game extends View implements MouseListener, ActionListener {
 		if (remaining < 0) 
 			remaining = 0;
 		int seconds = (int) ((remaining)/1000);
-		label.setText((String.valueOf(seconds)));
+		label.setText((String.valueOf(seconds) + " s"));
 		
 		if (remaining == 0) {
 			timer.stop();
