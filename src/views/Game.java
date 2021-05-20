@@ -29,7 +29,6 @@ import java.awt.event.ActionEvent;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
-import java.util.*;
 
 
 /**
@@ -43,7 +42,7 @@ public class Game extends View implements MouseListener, ActionListener {
 	private DatabaseReference ref;
 	private Board board;
 	private JLabel label;
-	private JButton back, undo, reset, turnOnAi, turnOffAi;
+	private JButton back, undo, reset;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -73,17 +72,6 @@ public class Game extends View implements MouseListener, ActionListener {
 		reset.setPreferredSize(new Dimension(120, 30));
 	    reset.addActionListener(this);
 	    add(reset);
-	    
-	    turnOnAi = new JButton("Turn AI On");
-		turnOnAi.setPreferredSize(new Dimension(120, 30));
-	    turnOnAi.addActionListener(this);
-	    add(turnOnAi);
-	    
-	    turnOffAi = new JButton("Turn AI Off");
-		turnOffAi.setPreferredSize(new Dimension(120, 30));
-	    turnOffAi.addActionListener(this);
-	    add(turnOffAi);
-	    turnOffAi.setVisible(false);
 
 	    board = new Board(this);
 
@@ -106,6 +94,8 @@ public class Game extends View implements MouseListener, ActionListener {
 	    }
 	}
 	
+	public Board getBoard() { return board; }
+	
 	// used methods from superclass/interfaces
 	/**
 	 * paintComponent method from JPanel superclass; called at each repaint
@@ -122,8 +112,6 @@ public class Game extends View implements MouseListener, ActionListener {
 		if(b==back) push("menu");
 		else if(b==undo) pushUndo();
 		else if(b==reset) pushReset();
-		else if(b==turnOnAi) turnOnAi();
-		else if(b==turnOffAi) turnOffAi();
 		updateTimer();
 		repaint();
 	}
@@ -162,18 +150,6 @@ public class Game extends View implements MouseListener, ActionListener {
 	}
 	private void pushUndo() {
 		ref.push().setValueAsync(Mark.removePost("u"));
-	}
-	private void turnOnAi() {
-		board.turnOnAi();
-		turnOnAi.setVisible(false);
-		turnOffAi.setVisible(true);
-		repaint();
-	}
-	private void turnOffAi() {
-		board.turnOffAi();
-		turnOffAi.setVisible(false);
-		turnOnAi.setVisible(true);
-		repaint();
 	}
 	
 	// methods required by MouseListener interface (action is based on area that is clicked)

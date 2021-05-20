@@ -84,6 +84,8 @@ public class Main extends JFrame {
 		c.repaint();
 		repaint();
 	}
+	
+	public Game getGame() { return game; }
 
 	/**
 	 * main method

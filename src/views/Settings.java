@@ -7,9 +7,12 @@
 package views;
 
 import javax.swing.JButton;
+
+import ai.RandomPlayer;
 import ultimate_tictactoe.Main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
@@ -22,7 +25,7 @@ import java.awt.event.*;
 public class Settings extends View implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
-	private JButton back;
+	private JButton back, turnOnAi, turnOffAi;
 	/**
 	 * Displays the functions of the Settings page
 	 */
@@ -34,6 +37,17 @@ public class Settings extends View implements ActionListener{
 		back.addActionListener(this);
 		back.setBounds(10, 10, 20, 10);
 		add(back);
+		
+		turnOnAi = new JButton("Turn AI On");
+		turnOnAi.setPreferredSize(new Dimension(120, 30));
+	    turnOnAi.addActionListener(this);
+	    add(turnOnAi);
+	    
+	    turnOffAi = new JButton("Turn AI Off");
+		turnOffAi.setPreferredSize(new Dimension(120, 30));
+	    turnOffAi.addActionListener(this);
+	    add(turnOffAi);
+	    turnOffAi.setVisible(false);
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -52,7 +66,23 @@ public class Settings extends View implements ActionListener{
 		JButton b = (JButton)e.getSource();
 		if (b == back) {
 			push("menu");
-		}		
+		}
+		else if(b==turnOnAi) turnOnAi();
+		else if(b==turnOffAi) turnOffAi();
+	}
+	
+	private void turnOnAi() {
+		getRouter().getGame().getBoard().turnOnAi(new RandomPlayer(getRouter().getGame().getBoard()));
+		turnOnAi.setVisible(false);
+		turnOffAi.setVisible(true);
+		repaint();
+	}
+	
+	private void turnOffAi() {
+		getRouter().getGame().getBoard().turnOffAi();
+		turnOffAi.setVisible(false);
+		turnOnAi.setVisible(true);
+		repaint();
 	}
 
 }

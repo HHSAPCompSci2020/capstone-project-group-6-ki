@@ -5,7 +5,7 @@
 package objects;
 
 import views.Game;
-import ai.RandomPlayer;
+import ai.AI;
 
 import java.util.ArrayList;
 import java.awt.Color;
@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 /**
  * Holds all the gameboard data
  * @author katytsao
- *
  */
 public class Board {
 
@@ -29,7 +28,7 @@ public class Board {
 	private int nextGrid, clickedGrid, clickedSmallGrid;
 	private Spot clickedSpot, lastSpot;
 	private boolean gameOver, aiOn;
-	private RandomPlayer rp;
+	private AI ai;
 
 	private double margin = 0.1; // how much of the space will each small grid take? this means 0.1 margin on each side
 	private double m2 = 1-margin; // the other end of the big margin
@@ -48,7 +47,6 @@ public class Board {
 		bigMarks = new ArrayList<Mark>();
 		gameOver = false;
 		aiOn = false;
-		rp = new RandomPlayer(this);
 	}
 	
 	// public methods called by Game
@@ -68,7 +66,7 @@ public class Board {
 		if(numMarks>0) drawMarks(g);
 
 		if(!gameOver && aiOn && numMarks%2!=0) {
-			java.awt.Point p = rp.makeMove();
+			java.awt.Point p = ai.makeMove();
 			aiMoved(p.x, p.y);
 		}
 	}
@@ -137,7 +135,7 @@ public class Board {
 	}
 
 	// setters/getters
-	public void turnOnAi() { aiOn = true; }
+	public void turnOnAi(AI ai) { aiOn = true; this.ai = ai; }
 	public void turnOffAi() { aiOn = false; }
 	public int getNextGrid() { return nextGrid; }
 	public Spot getSmallSpot(int a, int b) { return smallSpots[a][b]; }

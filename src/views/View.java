@@ -24,5 +24,7 @@ public abstract class View extends JPanel {
 	public void push(String s) {
 		router.push(s);
 	}
+	
+	public Main getRouter() { return router; }
 
 }
