@@ -7,6 +7,8 @@
 package views;
 
 import ultimate_tictactoe.Main;
+
+import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -18,10 +20,14 @@ public class Instructions extends View implements ActionListener {
 
 	private JButton back;
 	private static final long serialVersionUID = 1L;
-	
+	/**
+	 * Displays the text on the instructions page
+	 * @param router 
+	 */
 	public Instructions(Main router) {
 		super(router);
-		
+		setBackground(Color.getHSBColor(55f / 360, 0.1f, 0.98f));
+
 		back = new JButton("Main Menu"); // return to main menu
 		back.addActionListener(this);
 		back.setBounds(10, 10, 20, 10);
@@ -48,20 +54,20 @@ public class Instructions extends View implements ActionListener {
 		L7.setBounds(50, 30, 150, 20);
 		add(L7);
 
-		L2.setBounds(50,40, 150,20); 
+		L2.setBounds(50,50, 150,20); 
 		add(L2);
 
 		L3.setBounds(50,60, 150,20); 
 		add(L3);
 
-		L4.setBounds(50,80, 150,20); 
+		L4.setBounds(50,90, 150,20); 
 		add(L4);
 
 		L5.setBounds(50,100, 150,20); 
 		add(L5);
 		
-		L6.setBounds(50,100, 150,20); 
-		add(L5);
+		L6.setBounds(50,190, 150,20); 
+		add(L6);
 	}
 
 	public void actionPerformed(ActionEvent e) {

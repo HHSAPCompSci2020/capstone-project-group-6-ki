@@ -104,16 +104,27 @@ Credits:
 * List the group members and describe how each member contributed to the completion of the final program. This could be classes written, art assets created, leadership/organizational skills exercises, or other tasks. Initially, this is how you plan on splitting the work.
 * Give credit to all outside resources used. This includes downloaded images or sounds, external java libraries, parent/tutor/student coding help, etc.]
 
+Outside resources:
+* Main menu tic tac toe image: wikipedia
+* Setting background colors: https://svn.apache.org/repos/asf/uima/uimaj/trunk/uimaj-ep-cas-editor/src/main/java/org/apache/uima/caseditor/core/model/DefaultColors.java
 
 Irena Liu:
 Done:
-* Created and updated UML
-To-do:
-* Figure out navigation between pages
+* Created and updated UML 
+* Set up all the views pages
+* Implement navigation between pages
+* Timer
+
+To Do:
+* Make the AI smarter
 
 
 Katy Tsao:
 Done:
 * Setup Eclipse project and classes
-To-do:
-* Set up the main game
+* Objects package
+* Basic AI
+* Fixed bug with navigation between pages
+
+
+
