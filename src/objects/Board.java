@@ -26,7 +26,7 @@ public class Board {
 	private ArrayList<Mark> smallMarks, bigMarks;
 	private Spot[] bigSpots;
 	private Spot[][] smallSpots;
-	private int nextGrid, clickedGrid, clickedSmol;
+	private int nextGrid, clickedGrid, clickedSmallGrid;
 	private Spot clickedSpot, lastSpot;
 	private boolean gameOver, aiOn;
 	private RandomPlayer rp;
@@ -83,11 +83,11 @@ public class Board {
 		if(allowedToMark()) {
 			if(numMarks%2 == 0) { // x goes first
 				clickedSpot.occupy(1);
-				game.pushMark(new X(clickedSpot, clickedGrid, clickedSmol));
+				game.pushMark(new X(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
 			else {
 				clickedSpot.occupy(2);
-				game.pushMark(new O(clickedSpot, clickedGrid, clickedSmol));
+				game.pushMark(new O(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
 		}
 	}
@@ -130,9 +130,9 @@ public class Board {
 			}
 
 			clickedGrid = smallMarks.get(numMarks-1).big();
-			clickedSmol = smallMarks.get(numMarks-1).small();
-			lastSpot = smallSpots[clickedGrid][clickedSmol];
-			nextGrid = clickedSmol;
+			clickedSmallGrid = smallMarks.get(numMarks-1).small();
+			lastSpot = smallSpots[clickedGrid][clickedSmallGrid];
+			nextGrid = clickedSmallGrid;
 		}
 	}
 
@@ -273,7 +273,7 @@ public class Board {
 			for(int j=1; j<=9; j++) {
 				if(smallSpots[i][j].contains(x, y)) {
 					clickedGrid = i;
-					clickedSmol = j;
+					clickedSmallGrid = j;
 					return smallSpots[i][j];
 				}
 			}
@@ -283,9 +283,9 @@ public class Board {
 	private void aiMoved(int a, int b) {
 		clickedSpot = getSmallSpot(a, b);
 		clickedGrid = a;
-		clickedSmol = b;
+		clickedSmallGrid = b;
 		clickedSpot.occupy(2);
-		game.pushMark(new O(clickedSpot, clickedGrid, clickedSmol));
+		game.pushMark(new O(clickedSpot, clickedGrid, clickedSmallGrid));
 	}
 
 }

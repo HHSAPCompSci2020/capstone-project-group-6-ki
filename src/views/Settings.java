@@ -44,14 +44,11 @@ public class Settings extends View implements ActionListener{
 		
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton)e.getSource();
 		if (b == back) {
 			push("menu");
-		}
-		// TODO Auto-generated method stub
-		
+		}		
 	}
 
 }
