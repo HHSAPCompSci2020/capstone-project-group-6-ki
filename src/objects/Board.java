@@ -80,11 +80,9 @@ public class Board {
 		clickedSpot = findSpot(x, y);
 		if(allowedToMark()) {
 			if(numMarks%2 == 0) { // x goes first
-				clickedSpot.occupy(1);
 				game.pushMark(new X(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
 			else {
-				clickedSpot.occupy(2);
 				game.pushMark(new O(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
 		}
@@ -98,6 +96,8 @@ public class Board {
 		numMarks++;
 		smallMarks.add(m);
 		lastSpot = getSmallSpot(m.big(), m.small());
+		if(m instanceof X) lastSpot.occupy(1);
+		else if(m instanceof O) lastSpot.occupy(2);
 		clickedGrid = m.big();
 		nextGrid = m.small();
 		checkFor3();
@@ -190,14 +190,14 @@ public class Board {
 		if (x != 0 
 				&& x == bigSpots[b].getOccupant() 
 				&& x == bigSpots[c].getOccupant()) {
+			bigSpots[clickedGrid].occupy(x);
+			gameOver = true;
 			if(x==1) {
 				JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
 			}
 			else if(x==2) {
 				JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
 			}
-			bigSpots[clickedGrid].occupy(x);
-			gameOver = true;
 		}
 	}
 
