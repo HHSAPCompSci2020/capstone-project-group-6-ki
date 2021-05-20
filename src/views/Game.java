@@ -115,11 +115,12 @@ public class Game extends View implements MouseListener, ActionListener {
 	 */
 	public void actionPerformed(ActionEvent e) {
 		updateTimer();
-		JButton b = (JButton)e.getSource();
-		if(b==back) push("menu");
-		else if(b==undo) pushUndo();
-		else if(b==reset) pushReset();
-		updateTimer();
+		if(e.getSource() instanceof JButton) {
+			JButton b = (JButton)e.getSource();
+			if(b==back) push("menu");
+			else if(b==undo) pushUndo();
+			else if(b==reset) pushReset();
+		}
 		repaint();
 	}
 	private void updateTimer() {
