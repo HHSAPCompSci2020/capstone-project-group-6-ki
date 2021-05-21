@@ -39,6 +39,7 @@ public class Game extends View implements MouseListener, ActionListener {
 	private long lastUpdate;
 	private long remaining;
 	private Timer timer;
+	private boolean timerOn;
 	private DatabaseReference ref;
 	private Board board;
 	private JLabel label;
@@ -61,10 +62,12 @@ public class Game extends View implements MouseListener, ActionListener {
 		remaining = 30000;
 		label.setLocation(500, 600);
 		add(label);
-		
+			
 		timer = new Timer(100, this);
 		timer.setInitialDelay(1);
+		label.setVisible(false);
 		timer.start();
+
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -114,7 +117,10 @@ public class Game extends View implements MouseListener, ActionListener {
 	 * Changes the game based on the button pressed
 	 */
 	public void actionPerformed(ActionEvent e) {
+		if (timerOn) {
+		label.setVisible(true);
 		updateTimer();
+		}
 		if(e.getSource() instanceof JButton) {
 			JButton b = (JButton)e.getSource();
 			if(b==back) push("menu");
@@ -139,6 +145,8 @@ public class Game extends View implements MouseListener, ActionListener {
 			
 		}
 	}
+	public void switchTimer() { timerOn = !timerOn; }
+	
 	public void mouseClicked(MouseEvent e) {
 		board.createMark(e.getX(), e.getY());
 		repaint();

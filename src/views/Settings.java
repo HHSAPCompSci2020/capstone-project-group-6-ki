@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.*;
 
 
@@ -25,7 +26,7 @@ import java.awt.event.*;
 public class Settings extends View implements ActionListener{
 	
 	private static final long serialVersionUID = 1L;
-	private JButton back, turnOnAi, turnOffAi;
+	private JButton back, turnOnAi, turnOffAi, turnOnTimer, turnOffTimer;
 	/**
 	 * Displays the functions of the Settings page
 	 */
@@ -48,12 +49,28 @@ public class Settings extends View implements ActionListener{
 	    turnOffAi.addActionListener(this);
 	    add(turnOffAi);
 	    turnOffAi.setVisible(false);
+	    
+	    turnOnTimer = new JButton("Timer");
+	    turnOnTimer.setLocation(new Point(300,300));
+	    turnOnTimer.setBackground(Color.red);
+	    turnOnTimer.setOpaque(true);
+	    turnOnTimer.setPreferredSize(new Dimension(120, 30));
+	    turnOnTimer.addActionListener(this);
+	    add(turnOnTimer);
+	    
+	    turnOffTimer = new JButton("Timer");
+	    turnOffTimer.setBackground(Color.green);
+	    turnOffTimer.setOpaque(true);
+	    turnOffTimer.setPreferredSize(new Dimension(120, 30));
+	    turnOffTimer.addActionListener(this);
+	    add(turnOffTimer);
+	    turnOffTimer.setVisible(false);
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		Font fnt0 = new Font("arial", Font.PLAIN, 15);
+		Font fnt0 = new Font("arial", Font.BOLD, 15);
 		g.setFont(fnt0);
 		g.setColor(Color.BLACK);
 		g.drawString("Change icon color of \"X\"", 50 , 200);
@@ -69,6 +86,8 @@ public class Settings extends View implements ActionListener{
 		}
 		else if(b==turnOnAi) turnOnAi();
 		else if(b==turnOffAi) turnOffAi();
+		else if(b==turnOnTimer) turnOnTimer();
+		else if(b==turnOffTimer) turnOffTimer();
 	}
 	
 	private void turnOnAi() {
@@ -82,6 +101,20 @@ public class Settings extends View implements ActionListener{
 		getRouter().getGame().getBoard().turnOffAi();
 		turnOffAi.setVisible(false);
 		turnOnAi.setVisible(true);
+		repaint();
+	}
+	
+	private void turnOnTimer() {
+		getRouter().getGame().switchTimer();
+		turnOnTimer.setVisible(false);
+		turnOffTimer.setVisible(true);
+		repaint();
+	}
+	
+	private void turnOffTimer() {
+		getRouter().getGame().switchTimer();
+		turnOffTimer.setVisible(false);
+		turnOnTimer.setVisible(true);
 		repaint();
 	}
 
