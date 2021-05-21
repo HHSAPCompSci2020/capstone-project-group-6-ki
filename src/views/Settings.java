@@ -32,36 +32,42 @@ public class Settings extends View implements ActionListener{
 	 */
 	public Settings(Main router) {
 		super(router);
+		setLayout(null);
 		setBackground(Color.getHSBColor(290f / 360, 0.15f, 0.98f));
 		
 		back = new JButton("Main Menu"); // return to main menu
 		back.addActionListener(this);
-		back.setBounds(10, 10, 20, 10);
+		back.setBounds(250, 10, 100, 40);
 		add(back);
 		
-		turnOnAi = new JButton("Turn AI On");
-		turnOnAi.setPreferredSize(new Dimension(120, 30));
+		turnOnAi = new JButton("AI Mode");
+//		turnOnAi.setPreferredSize(new Dimension(120, 30));	
 	    turnOnAi.addActionListener(this);
+	    turnOnAi.setBackground(Color.red);
+	    turnOnAi.setOpaque(true);
+	    turnOnAi.setBounds(200, 100, 180, 80);
 	    add(turnOnAi);
 	    
-	    turnOffAi = new JButton("Turn AI Off");
-		turnOffAi.setPreferredSize(new Dimension(120, 30));
+	    turnOffAi = new JButton("AI Mode");
+//		turnOffAi.setPreferredSize(new Dimension(120, 30));
+		turnOffAi.setBackground(Color.green);
+		turnOffAi.setOpaque(true);
+	    turnOffAi.setBounds(200, 100, 180, 80);
 	    turnOffAi.addActionListener(this);
 	    add(turnOffAi);
 	    turnOffAi.setVisible(false);
 	    
 	    turnOnTimer = new JButton("Timer");
-	    turnOnTimer.setLocation(new Point(300,300));
 	    turnOnTimer.setBackground(Color.red);
 	    turnOnTimer.setOpaque(true);
-	    turnOnTimer.setPreferredSize(new Dimension(120, 30));
+	    turnOnTimer.setBounds(200, 300, 180, 80);
 	    turnOnTimer.addActionListener(this);
 	    add(turnOnTimer);
 	    
 	    turnOffTimer = new JButton("Timer");
 	    turnOffTimer.setBackground(Color.green);
 	    turnOffTimer.setOpaque(true);
-	    turnOffTimer.setPreferredSize(new Dimension(120, 30));
+	    turnOffTimer.setBounds(200, 300, 180, 80);
 	    turnOffTimer.addActionListener(this);
 	    add(turnOffTimer);
 	    turnOffTimer.setVisible(false);
@@ -70,12 +76,12 @@ public class Settings extends View implements ActionListener{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		Font fnt0 = new Font("arial", Font.BOLD, 15);
+		Font fnt0 = new Font("arial", Font.BOLD, 18);
 		g.setFont(fnt0);
 		g.setColor(Color.BLACK);
-		g.drawString("Change icon color of \"X\"", 50 , 200);
-		g.drawString("Change icon color of \"O\"", 350 , 200);
-		g.drawString("AI Level", 150 , 400);
+		g.drawString("Green = on, red = off", 200 , 250);
+//		g.drawString("Change icon color of \"O\"", 350 , 200);
+//		g.drawString("AI Level", 150 , 400);
 		
 	}
 

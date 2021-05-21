@@ -43,21 +43,21 @@ public class Menu extends View implements ActionListener {
 		
 		settings = new JButton("Settings");
 		settings.setBounds(400, 500, 100, 100);
-		settings.setPreferredSize(new Dimension(150,90));
+		settings.setPreferredSize(new Dimension(100,60));
 		settings.addActionListener(this);
 		p.add(settings);
 		
 //		c.gridx = 50;
 //		c.gridy = 120;
 		info = new JButton("How to Play");
-		info.setPreferredSize(new Dimension(150,90));
+		info.setPreferredSize(new Dimension(100,60));
 		info.addActionListener(this);
 		p.add(info);
 		
 //		c.gridx = 50;
 //		c.gridy = 140;
 		game = new JButton("Play");
-		game.setPreferredSize(new Dimension(150,90));
+		game.setPreferredSize(new Dimension(100,60));
 //		game.
 		game.addActionListener(this);		
 		p.add(game);
