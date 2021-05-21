@@ -39,7 +39,7 @@ public class Game extends View implements MouseListener, ActionListener {
 	private long lastUpdate;
 	private long remaining;
 	private Timer timer;
-	private boolean timerOn;
+	private boolean timerOn = false;
 	private DatabaseReference ref;
 	private Board board;
 	private JLabel label;
@@ -64,7 +64,6 @@ public class Game extends View implements MouseListener, ActionListener {
 		add(label);
 			
 		timer = new Timer(100, this);
-		timer.setInitialDelay(1);
 		label.setVisible(false);
 		timer.start();
 
@@ -121,6 +120,8 @@ public class Game extends View implements MouseListener, ActionListener {
 		label.setVisible(true);
 		updateTimer();
 		}
+		else if (!timerOn ) label.setVisible(false);
+		
 		if(e.getSource() instanceof JButton) {
 			JButton b = (JButton)e.getSource();
 			if(b==back) push("menu");

@@ -37,7 +37,7 @@ public class Settings extends View implements ActionListener{
 		
 		back = new JButton("Main Menu"); // return to main menu
 		back.addActionListener(this);
-		back.setBounds(250, 10, 100, 40);
+		back.setBounds(240, 10, 100, 40);
 		add(back);
 		
 		turnOnAi = new JButton("AI Mode");
