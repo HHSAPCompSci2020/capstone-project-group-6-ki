@@ -22,6 +22,7 @@ public class Board {
 	private Game game;
 
 	private int numMarks;
+	private int turn;
 	private ArrayList<Mark> smallMarks, bigMarks;
 	private Spot[] bigSpots;
 	private Spot[][] smallSpots;
@@ -96,11 +97,31 @@ public class Board {
 		numMarks++;
 		smallMarks.add(m);
 		lastSpot = getSmallSpot(m.big(), m.small());
-		if(m instanceof X) lastSpot.occupy(1);
-		else if(m instanceof O) lastSpot.occupy(2);
+		if(m instanceof X) {
+			lastSpot.occupy(1);
+			turn = 2;
+		}
+		else if(m instanceof O) {
+			lastSpot.occupy(2);
+			turn = 1;
+		}
 		clickedGrid = m.big();
 		nextGrid = m.small();
 		checkFor3();
+	}
+	/**
+	 * 
+	 * @return who's turn it is
+	 */
+	public int getTurn() {
+		return turn;
+	}
+	/**
+	 * 
+	 * @return if game is over
+	 */
+	public boolean isOver() {
+		return gameOver;
 	}
 	
 	/**

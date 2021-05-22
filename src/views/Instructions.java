@@ -43,7 +43,7 @@ public class Instructions extends View implements ActionListener {
 		
 		JLabel L6 = new JLabel("Game rules: ");
 		JLabel L7 = new JLabel("The goal is to win the large game by getting 3 mini-game wins in a row as well");
-		JLabel L8 = new JLabel("In order to win a mini-game you have to get 3 in a row as well.");
+		JLabel L8 = new JLabel("In order to win a mini-game you have to get 3 in a row as well. \"X\" goes first");
 		JLabel L9 = new JLabel("NOTE: After your opponent selects a box of a small game, ");
 		JLabel L10 = new JLabel("you have to make your next move in the same small box. ");
 		JLabel L11 = new JLabel("The box you should make your next move in is marked with a light green color. ");
@@ -56,7 +56,7 @@ public class Instructions extends View implements ActionListener {
 //		L4.setAlignmentX(CENTER_ALIGNMENT);
 //		L5.setAlignmentX(CENTER_ALIGNMENT);
 		
-		L1.setBounds(20,-230, 600,600); 
+		L1.setBounds(20,-190, 600,600); 
 		add(L1);
 		
 		L2.setBounds(20, -210, 700, 700);

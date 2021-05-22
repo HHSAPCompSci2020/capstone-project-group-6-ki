@@ -36,13 +36,14 @@ import com.google.firebase.database.*;
  * @author katytsao
  */
 public class Game extends View implements MouseListener, ActionListener {
-	private long lastUpdate;
+//	private long lastUpdate;
+//	private int turn;
 	private long remaining;
-	private Timer timer;
+	private Timer timer1, timer2;
 	private boolean timerOn = false;
 	private DatabaseReference ref;
 	private Board board;
-	private JLabel label;
+	private JLabel label1, label2;
 	private JButton back, undo, reset;
 	private static final long serialVersionUID = 1L;
 
@@ -53,20 +54,27 @@ public class Game extends View implements MouseListener, ActionListener {
 		super(router);
 		addMouseListener(this);
 		setSize(600, 600);
-		
-		
-		 //30 seconds
-		label = new JLabel();
-		label.setText("30 s");
-		label.setSize(100, 20);
-		remaining = 30000;
-		label.setLocation(500, 600);
-		add(label);
-			
-		timer = new Timer(100, this);
-		label.setVisible(false);
-		timer.start();
 
+		label1 = new JLabel();
+		remaining = 15000;
+		label1.setText(Integer.toString((int)remaining/1000) + " s");
+		label1.setSize(100, 20);
+		label1.setLocation(50, 10);
+		add(label1);
+			
+		timer1 = new Timer(100, this);
+		label1.setVisible(false);
+//		timer.start();
+
+		label2 = new JLabel();
+		remaining = 15000;
+		label2.setText(Integer.toString((int)remaining/1000) + " s");
+		label2.setSize(100, 20);
+		label2.setLocation(450, 10);
+		add(label2);
+			
+		timer2 = new Timer(100, this);
+		label1.setVisible(false);
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -116,11 +124,15 @@ public class Game extends View implements MouseListener, ActionListener {
 	 * Changes the game based on the button pressed
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if (timerOn) {
-		label.setVisible(true);
+		if (timerOn) {			
+		System.out.print("2");
 		updateTimer();
+		
 		}
-		else if (!timerOn ) label.setVisible(false);
+		else if (!timerOn ) {
+			label1.setVisible(false);
+			label2.setVisible(false);
+		}
 		
 		if(e.getSource() instanceof JButton) {
 			JButton b = (JButton)e.getSource();
@@ -131,23 +143,41 @@ public class Game extends View implements MouseListener, ActionListener {
 		repaint();
 	}
 	private void updateTimer() {
-		long now = System.currentTimeMillis();
-		long elapsed = now - lastUpdate;
-		remaining -= elapsed;
-		lastUpdate = now;
-		
-		if (remaining < 0) 
-			remaining = 0;
-		int seconds = (int) ((remaining)/1000);
-		label.setText((String.valueOf(seconds) + " s"));
-		
-		if (remaining == 0) {
-			timer.stop();
+		remaining -=100;
+		if (remaining <= 0) {
+			timer1.stop();
+			//display game over
+		}		
+		else if (board.getTurn() == 1) {
+			timer2.restart();
 			
+			int seconds = (int) ((remaining)/1000);
+			label1.setText((String.valueOf(seconds) + " s"));
+			label1.setVisible(true);
+			label2.setVisible(false);
 		}
+		
+		else if (board.getTurn() == 2) {
+			timer1.restart();
+			int seconds = (int) ((remaining)/1000);
+			label2.setText((String.valueOf(seconds) + " s"));
+			label1.setVisible(false);
+			label2.setVisible(true);
+		}
+		
+
 	}
+	/**
+	 * Switch timer mode from on to off, or vice versa
+	 */
 	public void switchTimer() { timerOn = !timerOn; }
-	
+//	/**
+//	 * Changes who is going
+//	 * @param i player who's going next
+//	 */
+//	public void turn(int i) {
+//		turn = i;
+//	}
 	public void mouseClicked(MouseEvent e) {
 		board.createMark(e.getX(), e.getY());
 		repaint();

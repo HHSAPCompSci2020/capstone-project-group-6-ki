@@ -54,7 +54,7 @@ Must-have Features:
 * Undo and reset buttons: we’ll implement buttons that will remove the last play, or reset the game.
 * Basic AI: an AI that really just randomly selects an available location. It won’t be too hard to win against this basic AI. 
 * Main menu: the starting menu. Its options will include Play, where users can play the game; How to Play, which will have game instructions; and Settings, where players can change the game colors and icons, and select an AI level.
-* Online game: embed this game in a website (and use something with constant push/pull requests like websockets) so people can play the game with friends remotely. 
+* Online game (Firebase): embed this game in a website (and use something with constant push/pull requests like websockets) so people can play the game with friends remotely. 
 
 
 Want-to-have Features:[a]
@@ -64,12 +64,12 @@ Want-to-have Features:[a]
 * Color coding: different colors will highlight the last play, and the current mini-game.
 * Changing colors: users will be able to change the color of their X/O color, or the highlight color
 * Changing icons: we’ll have options other than X and O, and users will be able to change their icon.
-* Multi-level AI: an AI that has some sort of strategy algorithm, instead of just randomly picking. 
-
+* Smarter AI: an AI that has some sort of strategy algorithm, instead of just randomly picking. 
+* Simultaneous games: Use Firebase to allow the ability to create/join different rooms
 
 * Win tally: If players are playing multiple games, we’ll keep a running tally of how many games each player has won, and their win streak[b]
 * Timer: have a timer that runs the time limit for one turn, so that players can’t spend forever on their turn. This can be enabled/disabled in settings, and max time per turn can be adjusted. 
-* Speed Tic-tac-toe: this game mode is like speed chess in that each player has a total amount of time they can spend on their turns. This mode can be toggled in the settings menu, and total time can be adjusted. 
+
 
 
 Stretch Features:
@@ -110,7 +110,7 @@ Outside resources:
 
 Irena Liu:
 Done:
-* Created and updated UML 
+* Created and updated UML
 * Set up all the views pages
 * Implement navigation between pages
 * Timer
@@ -124,6 +124,7 @@ Done:
 * Setup Eclipse project and classes
 * Objects package
 * Basic AI
+* FireBase
 * Fixed bug with navigation between pages
 
 
