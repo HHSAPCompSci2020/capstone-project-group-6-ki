@@ -2,15 +2,19 @@ package objects;
 
 public class Post {
 	
-	public String letter;
+	public String id;
 	public int x, y, w, h, big, small;
 
 	public Post() {
 		
 	}
 	
-	public String getLetter() {
-		return letter;
+	public Post(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return id;
 	}
 	
 	public int getX() {

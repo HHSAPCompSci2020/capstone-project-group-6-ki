@@ -48,8 +48,8 @@ public abstract class Mark {
 	
 	// STATIC METHODS
 	public static Mark postToMark(Post p) {
-		if(p.letter.equals("x")) return new X(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
-		else if(p.letter.equals("o")) return new O(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		if(p.id.equals("x")) return new X(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
+		else if(p.id.equals("o")) return new O(new Rectangle(p.x, p.y, p.w, p.h), p.big, p.small);
 		else return null;
 	}
 	
@@ -63,17 +63,11 @@ public abstract class Mark {
 		p.big = m.big();
 		p.small = m.small();
 		if (m instanceof X) {
-			p.letter = "x";
+			p.id = "x";
 		}
 		else if (m instanceof O) {
-			p.letter = "o";
+			p.id = "o";
 		}
-		return p;
-	}
-	
-	public static Post removePost(String s) {
-		Post p = new Post();
-		p.letter = s;
 		return p;
 	}
 

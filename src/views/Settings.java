@@ -109,14 +109,14 @@ public class Settings extends View implements ActionListener{
 	}
 	
 	private void turnOnTimer() {
-		getRouter().getGame().turnOnTimer();
+		getRouter().getGame().pushPost("t");
 		turnOnTimer.setVisible(false);
 		turnOffTimer.setVisible(true);
 		repaint();
 	}
 	
 	private void turnOffTimer() {
-		getRouter().getGame().turnOffTimer();
+		getRouter().getGame().pushPost("t");
 		turnOffTimer.setVisible(false);
 		turnOnTimer.setVisible(true);
 		repaint();

@@ -22,6 +22,7 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private Container c;
 	private JPanel router;
+	private RoomChooser rc;
 	private Menu menu;
 	private Game game;
 	private Instructions info;
@@ -34,8 +35,8 @@ public class Main extends JFrame {
 	 */
 	public Main() throws IOException {
 		super("Ultimate Tic Tac Toe");
+		rc = new RoomChooser(this);
 		menu = new Menu(this);
-		game = new Game(this);
 		info = new Instructions(this);
 		settings = new Settings(this);
 		
@@ -43,7 +44,7 @@ public class Main extends JFrame {
 		c.setBackground(java.awt.Color.WHITE);
 		c.setSize(600, 600);
 		
-		router = menu;
+		router = rc;
 		c.add(router);
 
 		setSize(600, 650);
@@ -85,6 +86,7 @@ public class Main extends JFrame {
 		repaint();
 	}
 	
+	public void setGame(Game game) { this.game = game; }
 	public Game getGame() { return game; }
 
 	/**

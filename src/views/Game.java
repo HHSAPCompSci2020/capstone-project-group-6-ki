@@ -15,19 +15,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.FileInputStream;
-import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.*;
 import com.google.firebase.database.*;
 
 
@@ -49,7 +43,7 @@ public class Game extends View implements MouseListener, ActionListener {
 	/**
 	 * Creates a new Game component and draws all the grids
 	 */
-	public Game(Main router) {	
+	public Game(Main router, DatabaseReference ref) {	
 		super(router);
 		addMouseListener(this);
 		setSize(600, 600);
@@ -83,23 +77,8 @@ public class Game extends View implements MouseListener, ActionListener {
 		add(oLabel);
 		oLabel.setVisible(false);
 		
-	    FileInputStream refreshToken;
-	    try {
-	    	refreshToken = new FileInputStream("ultimate_tictactoe_key.json");
-	    	FirebaseOptions options = new FirebaseOptions.Builder()
-	    			.setCredentials(GoogleCredentials.fromStream(refreshToken))
-	    			.setDatabaseUrl("https://ultimate-tictactoe-f1e59-default-rtdb.firebaseio.com/")
-	    			.build();
-
-	    	FirebaseApp.initializeApp(options);
-	    	DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-	    	ref = database.child("game");
-
-	    	ref.addChildEventListener(new DatabaseChangeListener());
-
-	    } catch (IOException e) {
-	    	e.printStackTrace();
-	    }
+		this.ref = ref.child("posts");
+		this.ref.addChildEventListener(new DatabaseChangeListener());
 	}
 	
 	public Board getBoard() { return board; }
@@ -141,8 +120,8 @@ public class Game extends View implements MouseListener, ActionListener {
 		else if(e.getSource() instanceof JButton) {
 			JButton b = (JButton)e.getSource();
 			if(b==back) push("menu");
-			else if(b==undo) pushUndo();
-			else if(b==reset) pushReset();
+			else if(b==undo) pushPost("u");
+			else if(b==reset) pushPost("r");
 		}
 		repaint();
 	}
@@ -156,36 +135,32 @@ public class Game extends View implements MouseListener, ActionListener {
 	
 	// in-game methods
 	/**
-	 * Turns on the game timer
-	 */
-	public void turnOnTimer() {
-		timerOn = true;
-		xLabel.setVisible(true);
-		oLabel.setVisible(true);
-		t.start();
-	}
-	/**
-	 * Turns off the game timer
-	 */
-	public void turnOffTimer() {
-		t.stop();
-		timerOn = false;
-		xLabel.setVisible(false);
-		oLabel.setVisible(false);
-	}
-	/**
 	 * Pushes a new Mark to the Firebase database.
 	 * @param m The Mark to be pushed
 	 */
 	public void pushMark(Mark m) {
 		ref.push().setValueAsync(Mark.markToPost(m));
 	}
-	private void pushReset() {
-		ref.push().setValueAsync(Mark.removePost("r"));
-		ref.setValueAsync(null); // removes all data from the database
+	/**
+	 * Pushes a Post to the Firebase database with a given id
+	 */
+	public void pushPost(String id) {
+		ref.push().setValueAsync(new Post(id));
 	}
-	private void pushUndo() {
-		ref.push().setValueAsync(Mark.removePost("u"));
+	
+	private void toggleTimer() {
+		if(!timerOn) {
+			timerOn = true;
+			xLabel.setVisible(true);
+			oLabel.setVisible(true);
+			t.start();
+		}
+		else {
+			t.stop();
+			timerOn = false;
+			xLabel.setVisible(false);
+			oLabel.setVisible(false);
+		}
 	}
 	
 	// methods required by MouseListener interface (action is based on area that is clicked)
@@ -210,18 +185,16 @@ public class Game extends View implements MouseListener, ActionListener {
 		 */
 		public void onChildAdded(DataSnapshot dataSnapshot, String arg1) {
 			SwingUtilities.invokeLater(new Runnable() {  // This threading strategy will work with Swing programs. Just put whatever code you want inside of one of these "runnable" wrappers.
-
-				@Override
 				public void run() {
 					Post p = dataSnapshot.getValue(Post.class);
-					if(p.letter.equals("r")) board.reset();
-					else if (p.letter.equals("u")) board.undo();
-					else if(p.letter.equals("x") || p.letter.equals("o")) {
+					if(p.id.equals("t")) toggleTimer();
+					else if(p.id.equals("r")) board.reset();
+					else if (p.id.equals("u")) board.undo();
+					else if(p.id.equals("x") || p.id.equals("o")) {
 						board.addMark(Mark.postToMark(p));
 					}
 					repaint();
 				}
-				
 			});
 		}
 
