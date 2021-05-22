@@ -54,30 +54,32 @@ public class Game extends View implements MouseListener, ActionListener {
 		addMouseListener(this);
 		setSize(600, 600);
 		
+		xTime = 1200;
+		oTime = 1200;
+		xLabel = new JLabel("x time left: " + xTime/10.0 + "s");
+		xLabel.setSize(100, 20);
+		xLabel.setLocation(50, 10);
+		add(xLabel);
+		xLabel.setVisible(false);
+		
 		back = new JButton("BACK");
-		back.setPreferredSize(new Dimension(120, 30));
+		back.setPreferredSize(new Dimension(100, 30));
 	    back.addActionListener(this);
 	    add(back);
 		undo = new JButton("UNDO");
-		undo.setPreferredSize(new Dimension(120, 30));
+		undo.setPreferredSize(new Dimension(100, 30));
 	    undo.addActionListener(this);
 	    add(undo);
 	    reset = new JButton("RESET");
-		reset.setPreferredSize(new Dimension(120, 30));
+		reset.setPreferredSize(new Dimension(100, 30));
 	    reset.addActionListener(this);
 	    add(reset);
 
 	    board = new Board(this);
 			
-		t = new Timer(100, this);
-		xTime = 1200;
-		oTime = 1200;
-		xLabel = new JLabel("x time remaining: " + xTime/10.0 + "s");
-		xLabel.setSize(100, 20);
-		xLabel.setLocation(50, 10);
-		add(xLabel);
-		xLabel.setVisible(false);
-		oLabel = new JLabel("o time remaining: " + oTime/10.0 + "s");
+		t = new Timer(100, this);		
+		
+		oLabel = new JLabel("o time left: " + oTime/10.0 + "s");
 		oLabel.setSize(100, 20);
 		oLabel.setLocation(50, 30);
 		add(oLabel);
@@ -120,7 +122,7 @@ public class Game extends View implements MouseListener, ActionListener {
 			switch(board.getTurn()) {
 			case 'x':
 				xTime -= 1;
-				xLabel.setText("x time remaining: " + xTime/10.0 + "s");
+				xLabel.setText("x time left: " + xTime/10.0 + "s");
 				if(xTime<=0) {
 					t.stop();
 					board.gameWon('o');
@@ -130,7 +132,7 @@ public class Game extends View implements MouseListener, ActionListener {
 				
 			case 'o':
 				oTime -= 1;
-				oLabel.setText("o time remaining: " + oTime/10.0 + "s");
+				oLabel.setText("o time left: " + oTime/10.0 + "s");
 				if(oTime<=0) {
 					t.stop();
 					board.gameWon('x');

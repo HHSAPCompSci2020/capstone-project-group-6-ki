@@ -1,37 +1,12 @@
-﻿AP Computer Science Final Project - README Template
-
-
-Instructions:
-The first step in creating an excellent APCS final project is to write up a README. At this stage, this README file acts as your project proposal. Once you’ve filled in all components, Shelby will read through it and suggest edits. Ultimately, you need a document that adequately describes your project idea and we must agree on this plan.
-
-
-Have one member of your group make a copy of this Google Doc. Then, they should share it with all other members so that every group member has edit permissions.
-
-
-There’s a lot of parts of this document that you might not have full answers for yet. Because you haven’t written the program yet, it’s difficult to think about the instructions or which group members will do which parts. Even though this is hard to think about, you must have something in these sections that acts as your current plan. However, during the course of the project, you’ll continuously update this document. This means that you will not be held to exactly what you put here - components of this document can change (and it’s pretty common!).
-
-
-There is one exception: the Features List section. Once Shelby OKs your README, the Features List section cannot be modified. For this reason, it is most important that you get a solid idea of what you want to make and the primary features it will have now.
-
-
-Talk with your group. Consider drawing some pictures of what you think your project might look like. Be precise. When you’re ready, fill this out together. Each component in brackets below ( [these things] ) should be replaced with your ideas. Note that there are several sample READMEs posted on this assignment for you to use as guidance.
-
-
-
-
--------------------When README is finalized, remove everything above this line--------------------
-
-
-[Ultimate Tic Tac Toe]
+﻿[Ultimate Tic Tac Toe]
 Authors: Irena Liu, Katy Tsao
-Revision: 5-6-2021
+Revision: 5-22-2021
 
 
 Introduction: 
 If you like logic games, Ultimate Tic-Tac-Toe will be fun for you. This game is based on the very well-known game tic-tac-toe, but includes 10 games in progress simultaneously, with strategy needed to bring them all together. 
 Last year in physics we played ultimate tic-tac-toe with friends, but after a lot of wasted paper, some of our friends got tired of it and we were sad. This program will solve both the problem of bored high schoolers wasting a vast amount of paper for tic-tac-toe games, and being lonely. By creating a digital version, we can do our part in promoting sustainability and conserving crucial resources such as paper. In addition, traditional tic-tac-toe requires 2 people which means that bored and lonely high schoolers can’t enjoy the game at their own convenience which can harm their mental wellbeing. With our program, these people can find joy in playing tic-tac-toe without having to worry about finding someone else to play with them thanks to our AI mode consisting of several levels. In Ultimate Tic-Tac-Toe, there is a large tic-tac-toe grid and in each box there is a smaller game. The rules are similar to regular tic-tac-toe in that you want to win the large game by getting three in a row, but in order to claim a box of the large game you have to win the smaller game in that location. After your opponent selects a box of a small game, you have to play in the game in the location of the big game corresponding to the location they played in the smaller game.
-Primary features include color-coding for last plays and highlighted games, undo and reset buttons, and a multi-level AI. 
-
+Primary features include color-coding for last plays and highlighted games, undo and reset buttons, AI and timer modes, and . 
 
 
 
@@ -60,13 +35,11 @@ Must-have Features:
 Want-to-have Features:[a]
 [These are features that you would like to have by the project due date, but you’re unsure whether you’ll hit all of them. A good final project would have perhaps half of these completed. At least 5 are required. Again, fully describe each.]
 
-
 * Color coding: different colors will highlight the last play, and the current mini-game.
 * Changing colors: users will be able to change the color of their X/O color, or the highlight color
 * Changing icons: we’ll have options other than X and O, and users will be able to change their icon.
 * Smarter AI: an AI that has some sort of strategy algorithm, instead of just randomly picking. 
-* Simultaneous games: Use Firebase to allow the ability to create/join different rooms
-
+* Speed game: player has a certain amount of time total
 * Win tally: If players are playing multiple games, we’ll keep a running tally of how many games each player has won, and their win streak[b]
 * Timer: have a timer that runs the time limit for one turn, so that players can’t spend forever on their turn. This can be enabled/disabled in settings, and max time per turn can be adjusted. 
 
@@ -78,7 +51,7 @@ Stretch Features:
 * Mobile play: find a way to play this game on a mobile device instead of just desktop.
 * Ultimate Ultimate Tic-Tac-Toe: a tic-tac-toe game of 9 Ultimate Tic-Tac-Toe games, where you have to win 3 ultimate tic-tac-toe games in a row in the biggest game.
 * Additional players: allow adding additional players to make it harder, so you have to win against multiple people. [c]
-
+* Simultaneous games: Use Firebase to allow the ability to create/join different rooms
 
 Class List:
 [This section lists the Java classes that make up the program and very briefly describes what each represents. It’s totally fine to put this section in list format and not to use full sentences.]
@@ -111,9 +84,10 @@ Outside resources:
 Irena Liu:
 Done:
 * Created and updated UML
-* Set up all the views pages
+* Set up all the views pages (Main menu, Instructions, etc)
 * Implement navigation between pages
-* Timer
+* Timer Mode
+* Discuss Game board setup
 
 To Do:
 * Make the AI smarter
@@ -125,6 +99,7 @@ Done:
 * Objects package
 * Basic AI
 * FireBase
+* Discuss and setup Game board
 * Fixed bug with navigation between pages
 
 

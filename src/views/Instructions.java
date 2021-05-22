@@ -46,8 +46,8 @@ public class Instructions extends View implements ActionListener {
 		JLabel L9 = new JLabel("NOTE: After your opponent selects a box of a small game, ");
 		JLabel L10 = new JLabel("you have to make your next move in the same small box. ");
 		JLabel L11 = new JLabel("The box you should make your next move in is marked with a light green color. ");
-		JLabel L12 = new JLabel("During the game you can undo moves, reset the game, and go back to the main menu.");
-		
+		JLabel L12 = new JLabel("If no boxes lit up and it's your turn, you can move to any open space.");
+		JLabel L13 = new JLabel("During the game you can undo moves, reset the game, and go back to the main menu.");
 		
 //		L1.setAlignmentX(LEFT_ALIGNMENT);
 //		L2.setAlignmentX(CENTER_ALIGNMENT);
