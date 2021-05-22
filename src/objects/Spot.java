@@ -16,7 +16,7 @@ import java.awt.Rectangle;
 public class Spot extends Rectangle {
 
 	private boolean isOccupied;
-	private int occupant;
+	private char occupant;
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -25,7 +25,7 @@ public class Spot extends Rectangle {
 	public Spot() {
 		super();
 		isOccupied = false;
-		occupant = 0;
+		occupant = '0';
 	}
 	
 	/**
@@ -48,19 +48,19 @@ public class Spot extends Rectangle {
 		return isOccupied;
 	}
 	
-	/**
-	 * Changes the state of this Spot so it is occupied
-	 */
-	public void occupy() {
-		isOccupied = true;
-	}
+//	/**
+//	 * Changes the state of this Spot so it is occupied
+//	 */
+//	public void occupy() {
+//		isOccupied = true;
+//	}
 	
 	/**
 	 * Changes the state of this Spot so it is occupied
 	 * @param x The number of the player that occupied it
 	 */
-	public void occupy(int x) {
-		occupant = x;
+	public void occupy(char c) {
+		occupant = c;
 		isOccupied = true;
 	}
 	
@@ -68,7 +68,7 @@ public class Spot extends Rectangle {
 	 * Clears this Spot so it is empty
 	 */
 	public void clear() {
-		occupant = 0;
+		occupant = '0';
 		isOccupied = false;
 	}
 	
@@ -76,7 +76,7 @@ public class Spot extends Rectangle {
 	 * Getter for which player occupies this Spot
 	 * @return The number of the player who occupies this Spot
 	 */
-	public int getOccupant() {
+	public char getOccupant() {
 		return occupant;
 	}
 

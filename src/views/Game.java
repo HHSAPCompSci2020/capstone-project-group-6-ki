@@ -36,14 +36,13 @@ import com.google.firebase.database.*;
  * @author katytsao
  */
 public class Game extends View implements MouseListener, ActionListener {
-//	private long lastUpdate;
-//	private int turn;
-	private long remaining;
-	private Timer timer1, timer2;
+	
+	private int xTime, oTime;
+	private Timer t;
 	private boolean timerOn = false;
 	private DatabaseReference ref;
 	private Board board;
-	private JLabel label1, label2;
+	private JLabel xLabel, oLabel;
 	private JButton back, undo, reset;
 	private static final long serialVersionUID = 1L;
 
@@ -54,27 +53,6 @@ public class Game extends View implements MouseListener, ActionListener {
 		super(router);
 		addMouseListener(this);
 		setSize(600, 600);
-
-		label1 = new JLabel();
-		remaining = 15000;
-		label1.setText(Integer.toString((int)remaining/1000) + " s");
-		label1.setSize(100, 20);
-		label1.setLocation(50, 10);
-		add(label1);
-			
-		timer1 = new Timer(100, this);
-		label1.setVisible(false);
-//		timer.start();
-
-		label2 = new JLabel();
-		remaining = 15000;
-		label2.setText(Integer.toString((int)remaining/1000) + " s");
-		label2.setSize(100, 20);
-		label2.setLocation(450, 10);
-		add(label2);
-			
-		timer2 = new Timer(100, this);
-		label1.setVisible(false);
 		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(120, 30));
@@ -90,7 +68,21 @@ public class Game extends View implements MouseListener, ActionListener {
 	    add(reset);
 
 	    board = new Board(this);
-
+			
+		t = new Timer(100, this);
+		xTime = 1200;
+		oTime = 1200;
+		xLabel = new JLabel("x time remaining: " + xTime/10.0 + "s");
+		xLabel.setSize(100, 20);
+		xLabel.setLocation(50, 10);
+		add(xLabel);
+		xLabel.setVisible(false);
+		oLabel = new JLabel("o time remaining: " + oTime/10.0 + "s");
+		oLabel.setSize(100, 20);
+		oLabel.setLocation(50, 30);
+		add(oLabel);
+		oLabel.setVisible(false);
+		
 	    FileInputStream refreshToken;
 	    try {
 	    	refreshToken = new FileInputStream("ultimate_tictactoe_key.json");
@@ -121,20 +113,32 @@ public class Game extends View implements MouseListener, ActionListener {
 		board.draw(g);
 	}
 	/**
-	 * Changes the game based on the button pressed
+	 * Called when any ActionEvent is fired (including buttons and Timers)
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if (timerOn) {			
-		System.out.print("2");
-		updateTimer();
-		
+		if (timerOn && t.isRunning()) {			
+			switch(board.getTurn()) {
+			case 'x':
+				xTime -= 1;
+				xLabel.setText("x time remaining: " + xTime/10.0 + "s");
+				if(xTime<=0) {
+					t.stop();
+					board.gameWon('o');
+					break;
+				}
+				break;
+				
+			case 'o':
+				oTime -= 1;
+				oLabel.setText("o time remaining: " + oTime/10.0 + "s");
+				if(oTime<=0) {
+					t.stop();
+					board.gameWon('x');
+				}
+				break;
+			}
 		}
-		else if (!timerOn ) {
-			label1.setVisible(false);
-			label2.setVisible(false);
-		}
-		
-		if(e.getSource() instanceof JButton) {
+		else if(e.getSource() instanceof JButton) {
 			JButton b = (JButton)e.getSource();
 			if(b==back) push("menu");
 			else if(b==undo) pushUndo();
@@ -142,48 +146,33 @@ public class Game extends View implements MouseListener, ActionListener {
 		}
 		repaint();
 	}
-	private void updateTimer() {
-		remaining -=100;
-		if (remaining <= 0) {
-			timer1.stop();
-			//display game over
-		}		
-		else if (board.getTurn() == 1) {
-			timer2.restart();
-			
-			int seconds = (int) ((remaining)/1000);
-			label1.setText((String.valueOf(seconds) + " s"));
-			label1.setVisible(true);
-			label2.setVisible(false);
-		}
-		
-		else if (board.getTurn() == 2) {
-			timer1.restart();
-			int seconds = (int) ((remaining)/1000);
-			label2.setText((String.valueOf(seconds) + " s"));
-			label1.setVisible(false);
-			label2.setVisible(true);
-		}
-		
-
-	}
 	/**
-	 * Switch timer mode from on to off, or vice versa
+	 * Called whenever the mouse is clicked
 	 */
-	public void switchTimer() { timerOn = !timerOn; }
-//	/**
-//	 * Changes who is going
-//	 * @param i player who's going next
-//	 */
-//	public void turn(int i) {
-//		turn = i;
-//	}
 	public void mouseClicked(MouseEvent e) {
 		board.createMark(e.getX(), e.getY());
 		repaint();
 	}
 	
 	// in-game methods
+	/**
+	 * Turns on the game timer
+	 */
+	public void turnOnTimer() {
+		timerOn = true;
+		xLabel.setVisible(true);
+		oLabel.setVisible(true);
+		t.start();
+	}
+	/**
+	 * Turns off the game timer
+	 */
+	public void turnOffTimer() {
+		t.stop();
+		timerOn = false;
+		xLabel.setVisible(false);
+		oLabel.setVisible(false);
+	}
 	/**
 	 * Pushes a new Mark to the Firebase database.
 	 * @param m The Mark to be pushed

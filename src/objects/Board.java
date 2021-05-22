@@ -20,9 +20,8 @@ import javax.swing.JOptionPane;
 public class Board {
 
 	private Game game;
-
 	private int numMarks;
-	private int turn;
+	private char turn;
 	private ArrayList<Mark> smallMarks, bigMarks;
 	private Spot[] bigSpots;
 	private Spot[][] smallSpots;
@@ -48,6 +47,7 @@ public class Board {
 		bigMarks = new ArrayList<Mark>();
 		gameOver = false;
 		aiOn = false;
+		turn = 'x'; // x goes first
 	}
 	
 	// public methods called by Game
@@ -66,12 +66,11 @@ public class Board {
 		}
 		if(numMarks>0) drawMarks(g);
 
-		if(!gameOver && aiOn && numMarks%2!=0) {
+		if(!gameOver && aiOn && turn=='o') {
 			java.awt.Point p = ai.makeMove();
 			aiMoved(p.x, p.y);
 		}
 	}
-	
 	/**
 	 * Tries to create a new Mark at a clicked point
 	 * @param x The x-coordinate of the clicked point
@@ -80,10 +79,10 @@ public class Board {
 	public void createMark(int x, int y) {
 		clickedSpot = findSpot(x, y);
 		if(allowedToMark()) {
-			if(numMarks%2 == 0) { // x goes first
+			if(turn=='x') {
 				game.pushMark(new X(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
-			else {
+			else if(turn=='o'){
 				game.pushMark(new O(clickedSpot, clickedGrid, clickedSmallGrid));
 			}
 		}
@@ -98,32 +97,30 @@ public class Board {
 		smallMarks.add(m);
 		lastSpot = getSmallSpot(m.big(), m.small());
 		if(m instanceof X) {
-			lastSpot.occupy(1);
-			turn = 2;
+			lastSpot.occupy('x');
+			turn = 'o';
 		}
 		else if(m instanceof O) {
-			lastSpot.occupy(2);
-			turn = 1;
+			lastSpot.occupy('o');
+			turn = 'x';
 		}
 		clickedGrid = m.big();
 		nextGrid = m.small();
 		checkFor3();
 	}
 	/**
-	 * 
-	 * @return who's turn it is
+	 * Ends the game when someone wins
+	 * @param winner The character of the player who won
 	 */
-	public int getTurn() {
-		return turn;
+	public void gameWon(char winner) {
+		gameOver = true;
+		if(winner=='x') {
+			JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else if(winner=='o') {
+			JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
-	/**
-	 * 
-	 * @return if game is over
-	 */
-	public boolean isOver() {
-		return gameOver;
-	}
-	
 	/**
 	 * Clears the entire board
 	 */
@@ -131,8 +128,12 @@ public class Board {
 		numMarks = 0;
 		smallMarks.clear();
 		bigMarks.clear();
+		turn = 'x';
+		setupRectangles();
+//		for(Spot big : bigSpots) big.clear();
+//		for(Spot[] grid : smallSpots) for(int i=1; i<=9; i++) grid[i].clear();
+		gameOver = false;
 	}
-	
 	/**
 	 * Undoes the most recent move
 	 */
@@ -140,6 +141,7 @@ public class Board {
 		if(numMarks<=1) reset();
 		else {
 			numMarks--;
+			toggleTurn();
 			lastSpot.clear();
 			smallMarks.remove(numMarks-1);
 
@@ -161,14 +163,30 @@ public class Board {
 	public int getNextGrid() { return nextGrid; }
 	public Spot getSmallSpot(int a, int b) { return smallSpots[a][b]; }
 	public Spot getBigSpot(int a) { return bigSpots[a]; }
+	public char getTurn() { return turn; }
+	public boolean isOver() { return gameOver; }
 
 	// checking helpers
 	private boolean allowedToMark() {
-		if(clickedSpot == null) return false;
+//		System.out.println("checking!");
+		if(clickedSpot == null) {
+//			System.out.println("null click");
+			return false;
+		}
 		if(numMarks == 0) return true;
-		if(clickedSpot.isOccupied()) return false;
-		if(bigSpots[clickedGrid].isOccupied()) return false;
-		if(!bigSpots[nextGrid].isOccupied() && nextGrid!=clickedGrid) return false;
+		if(clickedSpot.isOccupied()) {
+//			System.out.println("spot already taken!");
+			return false;
+		}
+		if(bigSpots[clickedGrid].isOccupied()) {
+//			System.out.println("can't go in a completed minigame!");
+			return false;
+		}
+		if(!bigSpots[nextGrid].isOccupied() && nextGrid!=clickedGrid) {
+//			System.out.println("wrong minigame!");
+			return false;
+		}
+//		System.out.println("passed");
 		return true;
 	}
 	private void checkFor3() {
@@ -182,14 +200,14 @@ public class Board {
 		check3(3, 5, 7);
 	}
 	private void check3(int a, int b, int c) {
-		int x = smallSpots[clickedGrid][a].getOccupant();
+		char x = smallSpots[clickedGrid][a].getOccupant();
 		if (x != 0 
 				&& x == smallSpots[clickedGrid][b].getOccupant() 
 				&& x == smallSpots[clickedGrid][c].getOccupant()) {
-			if(x==1) {
+			if(x=='x') {
 				bigMarks.add(new X(bigSpots[clickedGrid], clickedGrid, 0));
 			}
-			else if(x==2) {
+			else if(x=='o') {
 				bigMarks.add(new O(bigSpots[clickedGrid], clickedGrid, 0));
 			}
 			bigSpots[clickedGrid].occupy(x);
@@ -207,18 +225,12 @@ public class Board {
 		checkBig3(3, 5, 7);
 	}
 	private void checkBig3(int a, int b, int c) {
-		int x = bigSpots[a].getOccupant();
+		char x = bigSpots[a].getOccupant();
 		if (x != 0 
 				&& x == bigSpots[b].getOccupant() 
 				&& x == bigSpots[c].getOccupant()) {
 			bigSpots[clickedGrid].occupy(x);
-			gameOver = true;
-			if(x==1) {
-				JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
-			}
-			else if(x==2) {
-				JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
-			}
+			gameWon(x);
 		}
 	}
 
@@ -239,7 +251,7 @@ public class Board {
 		for(Mark b : bigMarks) b.draw(g);
 	}
 	private void colorNextGrid(Graphics g) {
-		if(!bigSpots[nextGrid].isOccupied()) {
+		if(!bigSpots[nextGrid].isOccupied() && !gameOver) {
 			g.setColor(new Color(186, 255, 191));
 			g.fillRect(bigSpots[nextGrid].x, bigSpots[nextGrid].y, bigSpots[nextGrid].width, bigSpots[nextGrid].height);
 		}
@@ -303,8 +315,12 @@ public class Board {
 		clickedSpot = getSmallSpot(a, b);
 		clickedGrid = a;
 		clickedSmallGrid = b;
-		clickedSpot.occupy(2);
+		clickedSpot.occupy('o');
 		game.pushMark(new O(clickedSpot, clickedGrid, clickedSmallGrid));
+	}
+	private void toggleTurn() {
+		if(turn=='x') turn = 'o';
+		else if(turn=='o') turn = 'x';
 	}
 
 }

@@ -12,10 +12,8 @@ import ai.RandomPlayer;
 import ultimate_tictactoe.Main;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.*;
 
 
@@ -111,14 +109,14 @@ public class Settings extends View implements ActionListener{
 	}
 	
 	private void turnOnTimer() {
-		getRouter().getGame().switchTimer();
+		getRouter().getGame().turnOnTimer();
 		turnOnTimer.setVisible(false);
 		turnOffTimer.setVisible(true);
 		repaint();
 	}
 	
 	private void turnOffTimer() {
-		getRouter().getGame().switchTimer();
+		getRouter().getGame().turnOffTimer();
 		turnOffTimer.setVisible(false);
 		turnOnTimer.setVisible(true);
 		repaint();
