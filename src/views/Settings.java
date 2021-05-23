@@ -55,14 +55,14 @@ public class Settings extends View implements ActionListener{
 	    add(turnOffAi);
 	    turnOffAi.setVisible(false);
 	    
-	    turnOnTimer = new JButton("Timer");
+	    turnOnTimer = new JButton("Speed Mode");
 	    turnOnTimer.setBackground(Color.red);
 	    turnOnTimer.setOpaque(true);
 	    turnOnTimer.setBounds(200, 300, 180, 80);
 	    turnOnTimer.addActionListener(this);
 	    add(turnOnTimer);
 	    
-	    turnOffTimer = new JButton("Timer");
+	    turnOffTimer = new JButton("Speed Mode");
 	    turnOffTimer.setBackground(Color.green);
 	    turnOffTimer.setOpaque(true);
 	    turnOffTimer.setBounds(200, 300, 180, 80);
