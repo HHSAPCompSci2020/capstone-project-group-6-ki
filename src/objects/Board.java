@@ -120,7 +120,6 @@ public class Board {
 		else if(winner=='o') {
 			JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);				
 		}
-		reset();
 	}
 	/**
 	 * Clears the entire board
@@ -131,9 +130,8 @@ public class Board {
 		bigMarks.clear();
 		turn = 'x';
 		setupRectangles();
-//		for(Spot big : bigSpots) big.clear();
-//		for(Spot[] grid : smallSpots) for(int i=1; i<=9; i++) grid[i].clear();
 		gameOver = false;
+		game.restartTime();
 	}
 	/**
 	 * Undoes the most recent move
@@ -169,25 +167,11 @@ public class Board {
 
 	// checking helpers
 	private boolean allowedToMark() {
-//		System.out.println("checking!");
-		if(clickedSpot == null) {
-//			System.out.println("null click");
-			return false;
-		}
+		if(clickedSpot == null) return false;
 		if(numMarks == 0) return true;
-		if(clickedSpot.isOccupied()) {
-//			System.out.println("spot already taken!");
-			return false;
-		}
-		if(bigSpots[clickedGrid].isOccupied()) {
-//			System.out.println("can't go in a completed minigame!");
-			return false;
-		}
-		if(!bigSpots[nextGrid].isOccupied() && nextGrid!=clickedGrid) {
-//			System.out.println("wrong minigame!");
-			return false;
-		}
-//		System.out.println("passed");
+		if(clickedSpot.isOccupied()) return false;
+		if(bigSpots[clickedGrid].isOccupied()) return false;
+		if(!bigSpots[nextGrid].isOccupied() && nextGrid!=clickedGrid) return false;
 		return true;
 	}
 	private void checkFor3() {

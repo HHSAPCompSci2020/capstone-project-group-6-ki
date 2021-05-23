@@ -48,14 +48,6 @@ public class Game extends View implements MouseListener, ActionListener {
 		addMouseListener(this);
 		setSize(600, 600);
 		
-		xTime = 1200;
-		oTime = 1200;
-		xLabel = new JLabel("x time left: " + xTime/10.0 + "s");
-		xLabel.setSize(100, 20);
-		xLabel.setLocation(50, 10);
-		add(xLabel);
-		xLabel.setVisible(false);
-		
 		back = new JButton("BACK");
 		back.setPreferredSize(new Dimension(100, 30));
 	    back.addActionListener(this);
@@ -72,7 +64,13 @@ public class Game extends View implements MouseListener, ActionListener {
 	    board = new Board(this);
 			
 		t = new Timer(100, this);		
-		
+		xTime = 1200;
+		oTime = 1200;
+		xLabel = new JLabel("x time left: " + xTime/10.0 + "s");
+		xLabel.setSize(100, 20);
+		xLabel.setLocation(50, 10);
+		add(xLabel);
+		xLabel.setVisible(false);
 		oLabel = new JLabel("o time left: " + oTime/10.0 + "s");
 		oLabel.setSize(100, 20);
 		oLabel.setLocation(50, 30);
@@ -97,9 +95,11 @@ public class Game extends View implements MouseListener, ActionListener {
 	 * Called when any ActionEvent is fired (including buttons and Timers)
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if (board.isOver()) {
-			turnOffTimer();
-			board.reset();
+		if(e.getSource() instanceof JButton) {
+			JButton b = (JButton)e.getSource();
+			if(b==back) push("menu");
+			else if(b==undo) pushPost("u");
+			else if(b==reset) pushPost("r");
 		}
 		if (timerOn && t.isRunning()) {			
 			switch(board.getTurn()) {
@@ -119,17 +119,10 @@ public class Game extends View implements MouseListener, ActionListener {
 				if(oTime<=0) {
 					t.stop();
 					board.gameWon('x');
-					
 					break;
 				}
 				break;
 			}
-		}
-		else if(e.getSource() instanceof JButton) {
-			JButton b = (JButton)e.getSource();
-			if(b==back) push("menu");
-			else if(b==undo) pushPost("u");
-			else if(b==reset) pushPost("r");
 		}
 		repaint();
 	}
@@ -154,6 +147,11 @@ public class Game extends View implements MouseListener, ActionListener {
 	 */
 	public void pushPost(String id) {
 		ref.push().setValueAsync(new Post(id));
+	}
+	
+	public void restartTime() {
+		xTime = 1200;
+		oTime = 1200;
 	}
 	
 	private void toggleTimer() {

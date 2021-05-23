@@ -109,7 +109,11 @@ public class RoomChooser extends JPanel implements ActionListener {
 							return;
 						}
 					}
-					router.setGame(new Game(router, snap.getChildren().iterator().next().getRef()));
+//					System.out.println(snap);
+//					System.out.println(snap.getRef());
+//					DatabaseReference gameRef = snap.getRef();
+//							// snap.getChildren().iterator().next().getRef();
+					router.setGame(new Game(router, ref.child(roomName)));
 					router.push("game");
 				}
 				public void onCancelled(DatabaseError arg0) {}
