@@ -118,6 +118,10 @@ public class Game extends View implements MouseListener, ActionListener {
 	 * Called when any ActionEvent is fired (including buttons and Timers)
 	 */
 	public void actionPerformed(ActionEvent e) {
+		if (board.isOver()) {
+			turnOffTimer();
+			board.reset();
+		}
 		if (timerOn && t.isRunning()) {			
 			switch(board.getTurn()) {
 			case 'x':
@@ -136,6 +140,8 @@ public class Game extends View implements MouseListener, ActionListener {
 				if(oTime<=0) {
 					t.stop();
 					board.gameWon('x');
+					
+					break;
 				}
 				break;
 			}

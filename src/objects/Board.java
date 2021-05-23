@@ -115,11 +115,12 @@ public class Board {
 	public void gameWon(char winner) {
 		gameOver = true;
 		if(winner=='x') {
-			JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);			
 		}
 		else if(winner=='o') {
-			JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);			
+			JOptionPane.showMessageDialog(null,	"O wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);				
 		}
+		reset();
 	}
 	/**
 	 * Clears the entire board

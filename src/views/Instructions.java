@@ -37,8 +37,8 @@ public class Instructions extends View implements ActionListener {
 		JLabel L1 = new JLabel("Game Modes:");
 		JLabel L2 = new JLabel("The default is multiplayer-mode meaning you have to find someone to play with.");
 		JLabel L3 = new JLabel("To play by yourself, simply go to Settings and enable AI Mode");
-		JLabel L4 = new JLabel("To add some speed, turn on Timer Mode in Settings. Each player will only have 10 seconds");
-		JLabel L5 = new JLabel("to make a move, and if the timer runs out, your opponent automatically wins so watch out!");
+		JLabel L4 = new JLabel("If Speed Mode is enabled in Settings, each player will get a 120s countdown timer (total");
+		JLabel L5 = new JLabel("time to make all moves) If the timer runs out, your opponent automatically wins so watch out!");
 		
 		JLabel L6 = new JLabel("Game rules: ");
 		JLabel L7 = new JLabel("The goal is to win the large game by getting 3 mini-game wins in a row as well");
@@ -90,6 +90,9 @@ public class Instructions extends View implements ActionListener {
 		
 		L12.setBounds(20,20, 700,700); 
 		add(L12);
+		
+		L13.setBounds(20, 40, 700,700); 
+		add(L13);
 	}
 
 	public void actionPerformed(ActionEvent e) {
