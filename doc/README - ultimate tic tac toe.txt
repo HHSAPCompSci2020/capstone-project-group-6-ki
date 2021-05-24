@@ -5,21 +5,22 @@ Revision: 5-22-2021
 
 Introduction: 
 If you like logic games, Ultimate Tic-Tac-Toe will be fun for you. This game is based on the very well-known game tic-tac-toe, but includes 10 games in progress simultaneously, with strategy needed to bring them all together. 
-Last year in physics we played ultimate tic-tac-toe with friends, but after a lot of wasted paper, some of our friends got tired of it and we were sad. This program will solve both the problem of bored high schoolers wasting a vast amount of paper for tic-tac-toe games, and being lonely. By creating a digital version, we can do our part in promoting sustainability and conserving crucial resources such as paper. In addition, traditional tic-tac-toe requires 2 people which means that bored and lonely high schoolers can’t enjoy the game at their own convenience which can harm their mental wellbeing. With our program, these people can find joy in playing tic-tac-toe without having to worry about finding someone else to play with them thanks to our AI mode consisting of several levels. In Ultimate Tic-Tac-Toe, there is a large tic-tac-toe grid and in each box there is a smaller game. The rules are similar to regular tic-tac-toe in that you want to win the large game by getting three in a row, but in order to claim a box of the large game you have to win the smaller game in that location. After your opponent selects a box of a small game, you have to play in the game in the location of the big game corresponding to the location they played in the smaller game.
-Primary features include color-coding for last plays and highlighted games, undo and reset buttons, AI and timer modes, and firebase where people can play . 
+Last year in physics we played ultimate tic-tac-toe with friends, but after a lot of wasted paper, some of our friends got tired of it and we were sad. This program will solve both the problem of bored high schoolers wasting a vast amount of paper for tic-tac-toe games, and being lonely. By creating a digital version, we can do our part in promoting sustainability and conserving crucial resources such as paper. In addition, traditional tic-tac-toe requires 2 people which means that bored and lonely high schoolers can’t enjoy the game at their own convenience which can harm their mental wellbeing. With our program, these people can find joy in playing tic-tac-toe without having to worry about finding someone else to play with them thanks to our AI mode consisting of several levels. 
+In Ultimate Tic-Tac-Toe, there is a large tic-tac-toe grid and in each box there is a smaller game. The rules are similar to regular tic-tac-toe in that you want to win the large game by getting three in a row, but in order to claim a box of the large game you have to win the smaller game in that location. After your opponent selects a box of a small game, you have to play in the game in the location of the big game corresponding to the location they played in the smaller game.
+Our game can be used by all people, regardless of their age and location thanks to the instructions embedded into the program, as well as the use of firebase to allow people to join different game servers.
+Other primary features include color-coding for last plays and highlighted games, undo and reset buttons, AI mode, and speed mode. 
 
 
 
 Instructions:
-When the user first runs the program, they are met with the main menu in which they will navigate through to set up the game. The icons that are displayed in the main menu are “settings,” “how to play,” and “play.” 
+When the user first runs the program, they are met with a screen to chose their "game room" or create their own. Once the user joins a room the main menu is displayed in which they will navigate through to set up the game. If there are two people in a room, one person should be designated to do the controls to avoid crashes. The icons that are displayed in the main menu are “settings,” “how to play,” and “play.” 
 
-If the user selects “settings,” they are able to customize their player by changing their icon and X/O color. This is also where they chose between the AI or multiplayer mode.  If AI is selected there may be multiple levels that the player can choose to play against. 
-
+If the user selects “settings,” they are able to change their game mode. The options are enabling AI mode and Speed mode.  If AI is selected the user will play against the computer and will not need to find an opponent. If timer mode is selected, the game will move at a faster pace and the users players have to make all their moves in 120 seconds total. If the timer runs out, the opponent automatically wins.
 After they customize their game, they will have to go back to the main menu and select “play” to go to the main game.
 
 If the user selects “how to play,” they will be shown the instructions. 
 
-During the match, they click on the space on the board where they would like to place their next move.
+During the match, they click on the space on the board where they would like to place their next move. You have to make your next move in the mini-game corresponding to your opponent's last move. The mini-game box will light up green and that will signify where the next move should be placed. If none of the boxes light up, you can place your move anywhere you'd like. This happens when the mini-game the user should move to is already claimed (there's a winner there). 
 
 
 Features List (THE ONLY SECTION THAT CANNOT CHANGE LATER):
