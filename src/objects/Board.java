@@ -113,6 +113,8 @@ public class Board {
 	 * @param winner The character of the player who won
 	 */
 	public void gameWon(char winner) {
+		if(gameOver) return;
+		
 		gameOver = true;
 		if(winner=='x') {
 			JOptionPane.showMessageDialog(null,	"X wins!", "Game over!", JOptionPane.INFORMATION_MESSAGE);			
@@ -140,9 +142,8 @@ public class Board {
 		if(numMarks<=1) reset();
 		else {
 			numMarks--;
-			toggleTurn();
 			lastSpot.clear();
-			smallMarks.remove(numMarks-1);
+			smallMarks.remove(numMarks);
 
 			if(bigSpots[clickedGrid].isOccupied()) {
 				bigSpots[clickedGrid].clear();
@@ -153,6 +154,7 @@ public class Board {
 			clickedSmallGrid = smallMarks.get(numMarks-1).small();
 			lastSpot = smallSpots[clickedGrid][clickedSmallGrid];
 			nextGrid = clickedSmallGrid;
+			toggleTurn();
 		}
 	}
 
