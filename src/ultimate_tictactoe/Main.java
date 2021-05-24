@@ -8,7 +8,6 @@ package ultimate_tictactoe;
 
 import views.*;
 import java.awt.Container;
-import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -33,7 +32,7 @@ public class Main extends JFrame {
 	 * Main constructor — sets up JFrame window
 	 * 
 	 */
-	public Main() throws IOException {
+	public Main() {
 		super("Ultimate Tic Tac Toe");
 		rc = new RoomChooser(this);
 		menu = new Menu(this);
@@ -86,15 +85,23 @@ public class Main extends JFrame {
 		repaint();
 	}
 	
+	/**
+	 * Sets this game
+	 * @param game The Game to be added
+	 */
 	public void setGame(Game game) { this.game = game; }
+	/**
+	 * 
+	 * @return The Game of this room
+	 */
 	public Game getGame() { return game; }
-
+	
 	/**
 	 * main method
 	 * creates a Main object
 	 *  
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 			new Main();
 	}
 

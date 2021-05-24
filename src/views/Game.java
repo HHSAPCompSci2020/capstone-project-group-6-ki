@@ -81,6 +81,10 @@ public class Game extends View implements MouseListener, ActionListener {
 		this.ref.addChildEventListener(new DatabaseChangeListener());
 	}
 	
+	/**
+	 * 
+	 * @return This Game's Board
+	 */
 	public Board getBoard() { return board; }
 	
 	// used methods from superclass/interfaces
@@ -149,6 +153,9 @@ public class Game extends View implements MouseListener, ActionListener {
 		ref.push().setValueAsync(new Post(id));
 	}
 	
+	/**
+	 * Resets the timers.
+	 */
 	public void restartTime() {
 		xTime = 1200;
 		oTime = 1200;

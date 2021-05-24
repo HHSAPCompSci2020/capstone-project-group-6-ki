@@ -27,7 +27,11 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.*;
 import com.google.firebase.database.*;
 
-
+/**
+ * Page where players can choose a room; connects to Firebase to connect to rooms
+ * @author katytsao
+ *
+ */
 public class RoomChooser extends JPanel implements ActionListener {
 
 	private Main router;
@@ -37,6 +41,10 @@ public class RoomChooser extends JPanel implements ActionListener {
 	private DefaultListModel<String> model;
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Creates a new RoomChooser view
+	 * @param router The Main object holding this RoomChooser
+	 */
 	public RoomChooser(Main router) {
 		super();
 		this.router = router;
@@ -76,6 +84,9 @@ public class RoomChooser extends JPanel implements ActionListener {
 	    }
 	}
 	
+	/**
+	 * Method required by ActionListener interface; responds to button clicks
+	 */
 	public void actionPerformed(ActionEvent e) {
 		JButton b = (JButton) e.getSource();
 		if (b == create) {
@@ -109,10 +120,6 @@ public class RoomChooser extends JPanel implements ActionListener {
 							return;
 						}
 					}
-//					System.out.println(snap);
-//					System.out.println(snap.getRef());
-//					DatabaseReference gameRef = snap.getRef();
-//							// snap.getChildren().iterator().next().getRef();
 					router.setGame(new Game(router, ref.child(roomName)));
 					router.push("menu");
 				}

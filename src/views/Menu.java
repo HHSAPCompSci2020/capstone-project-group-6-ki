@@ -30,7 +30,7 @@ public class Menu extends View implements ActionListener {
 	 * @param router
 	 * 
 	 */
-	public Menu(Main router) throws IOException {
+	public Menu(Main router) {
 		super(router);
 		JPanel p = new JPanel(new GridBagLayout());
 		setBackground(Color.getHSBColor(330f / 360, 0.15f, 0.95f));
