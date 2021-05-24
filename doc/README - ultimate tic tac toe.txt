@@ -6,7 +6,7 @@ Revision: 5-22-2021
 Introduction: 
 If you like logic games, Ultimate Tic-Tac-Toe will be fun for you. This game is based on the very well-known game tic-tac-toe, but includes 10 games in progress simultaneously, with strategy needed to bring them all together. 
 Last year in physics we played ultimate tic-tac-toe with friends, but after a lot of wasted paper, some of our friends got tired of it and we were sad. This program will solve both the problem of bored high schoolers wasting a vast amount of paper for tic-tac-toe games, and being lonely. By creating a digital version, we can do our part in promoting sustainability and conserving crucial resources such as paper. In addition, traditional tic-tac-toe requires 2 people which means that bored and lonely high schoolers can’t enjoy the game at their own convenience which can harm their mental wellbeing. With our program, these people can find joy in playing tic-tac-toe without having to worry about finding someone else to play with them thanks to our AI mode consisting of several levels. In Ultimate Tic-Tac-Toe, there is a large tic-tac-toe grid and in each box there is a smaller game. The rules are similar to regular tic-tac-toe in that you want to win the large game by getting three in a row, but in order to claim a box of the large game you have to win the smaller game in that location. After your opponent selects a box of a small game, you have to play in the game in the location of the big game corresponding to the location they played in the smaller game.
-Primary features include color-coding for last plays and highlighted games, undo and reset buttons, AI and timer modes, and . 
+Primary features include color-coding for last plays and highlighted games, undo and reset buttons, AI and timer modes, and firebase where people can play . 
 
 
 
@@ -32,13 +32,12 @@ Must-have Features:
 * Online game (Firebase): embed this game in a website (and use something with constant push/pull requests like websockets) so people can play the game with friends remotely. 
 
 
-Want-to-have Features:[a]
+Want-to-have Features:
 [These are features that you would like to have by the project due date, but you’re unsure whether you’ll hit all of them. A good final project would have perhaps half of these completed. At least 5 are required. Again, fully describe each.]
 
 * Color coding: different colors will highlight the last play, and the current mini-game.
 * Changing colors: users will be able to change the color of their X/O color, or the highlight color
 * Changing icons: we’ll have options other than X and O, and users will be able to change their icon.
-* Smarter AI: an AI that has some sort of strategy algorithm, instead of just randomly picking. 
 * Speed game: player has a certain amount of time total
 * Win tally: If players are playing multiple games, we’ll keep a running tally of how many games each player has won, and their win streak[b]
 * Timer: have a timer that runs the time limit for one turn, so that players can’t spend forever on their turn. This can be enabled/disabled in settings, and max time per turn can be adjusted. 
@@ -49,8 +48,7 @@ Stretch Features:
 [These are features that we agree a fully complete version of this program would have, but that you probably will not have time to implement. A good final project does not necessarily need to have any of these completed at all. At least 3 are required. Again, fully describe each.]
 * Learning AI: AI that starts at the highest strategic level, and has algorithms to learn what the user’s strategies are and block those. 
 * Mobile play: find a way to play this game on a mobile device instead of just desktop.
-* Ultimate Ultimate Tic-Tac-Toe: a tic-tac-toe game of 9 Ultimate Tic-Tac-Toe games, where you have to win 3 ultimate tic-tac-toe games in a row in the biggest game.
-* Additional players: allow adding additional players to make it harder, so you have to win against multiple people. [c]
+* Additional players: allow adding additional players to make it harder, so you have to win against multiple people, meaning there's now multiple players in a game not just 2. 
 * Simultaneous games: Use Firebase to allow the ability to create/join different rooms
 
 Class List:
@@ -83,25 +81,25 @@ Credits:
 Outside resources:
 * Main menu tic tac toe image: wikipedia
 * Setting background colors: https://svn.apache.org/repos/asf/uima/uimaj/trunk/uimaj-ep-cas-editor/src/main/java/org/apache/uima/caseditor/core/model/DefaultColors.java
-* Mr. Shelby's firebase, swing graphics demos
+* Mr. Shelby's firebase and swing graphics demos
+* Java API for swing
 
 Irena Liu:
 * Created and updated UML
-* Set up all the views pages (Main menu, Instructions, etc)
+* Views package (Main menu, Instructions, etc)
 * Implement navigation between pages
-* Timer Mode
+* Game modes
 * Discuss Game board setup
-* Plan presentation
-
+* Plan and edit presentation
 
 
 Katy Tsao:
 * Setup Eclipse project and classes
-* Objects package
+* Objects package (board, marks, etc)
 * Basic AI
 * FireBase
 * Discuss and setup Game board
-* Fixed bug with navigation between pages
+* Fixed navigation and firebase bug
 
 
 
