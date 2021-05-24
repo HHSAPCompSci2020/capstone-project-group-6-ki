@@ -55,20 +55,23 @@ Stretch Features:
 
 Class List:
 [This section lists the Java classes that make up the program and very briefly describes what each represents. It’s totally fine to put this section in list format and not to use full sentences.]
-* Main(JFrame): runs a JFrame with the game in it
-* Menu(JPanel)
-* Game(JPanel)
+
+* AI	
+	* RandomPlayer
 * Board
-* Post
-* Spot(Rectangle)
 * Mark
-   * X(Mark)
-   * O(Mark)
-* AI
-   * RandomPlayer
-* Instructions(JPanel)
-* Settings(JPanel)
+	* O
+	* X
+* Spot
+* Post 
+* Main
+* Game
+* Instructions
+* Menu
+* Settings
 * View
+* RoomChooser
+
 
 
 
@@ -80,21 +83,19 @@ Credits:
 Outside resources:
 * Main menu tic tac toe image: wikipedia
 * Setting background colors: https://svn.apache.org/repos/asf/uima/uimaj/trunk/uimaj-ep-cas-editor/src/main/java/org/apache/uima/caseditor/core/model/DefaultColors.java
+* Mr. Shelby's firebase, swing graphics demos
 
 Irena Liu:
-Done:
 * Created and updated UML
 * Set up all the views pages (Main menu, Instructions, etc)
 * Implement navigation between pages
 * Timer Mode
 * Discuss Game board setup
+* Plan presentation
 
-To Do:
-* Make the AI smarter
 
 
 Katy Tsao:
-Done:
 * Setup Eclipse project and classes
 * Objects package
 * Basic AI
